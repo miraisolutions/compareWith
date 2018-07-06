@@ -1,0 +1,4 @@
+Name: Compare with
+Description: Compare active file with other file (using Meld)
+Binding: compare_with
+Interactive: true
