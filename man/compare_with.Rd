@@ -2,9 +2,12 @@
 % Please edit documentation in R/compare.R
 \name{compare_with}
 \alias{compare_with}
+\alias{compare_with_neighbor}
 \title{Version-control comparison of files}
 \usage{
 compare_with()
+
+compare_with_neighbor()
 }
 \value{
 Invisibly returns the result of the meld command.
@@ -12,6 +15,12 @@ Invisibly returns the result of the meld command.
 \description{
 Version-control comparison of files
 }
+\details{
+compare_with_neighbor starts the file search in the directory of the
+first file, while compare_with starts the file search in the project root
+directory
+}
 \examples{
 \dontrun{compare_with()}
+\dontrun{compare_with_neighbor()}
 }
