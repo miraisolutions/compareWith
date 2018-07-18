@@ -20,4 +20,5 @@ SystemRequirements:
 URL: http://www.mirai-solutions.com,
   https://github.com/miraisolutions/miscellaneous/compareWith
 BugReports: https://github.com/miraisolutions/miscellaneous/compareWith/issues
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
