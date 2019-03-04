@@ -1,13 +1,16 @@
 Package: compareWith
-Title: Compare version-controlled files in RStudio on Linux with Meld
+Title: Compare version-controlled files in RStudio with Meld
 Version: 0.0.1
-Authors@R: c(person("Roland", "Schmid", role = c("aut", "cre"),
+Authors@R: c(person("Roland", "Schmid", role = c("aut"),
                     email = "roland.schmid@mirai-solutions.com"),
+             person("Nicoletta", "Farabullini", role = c("aut", "cre"),
+                    email = "nicoletta.farabullini@mirai-solutions.com"),
              person("Mirai Solutions GmbH", role = "cph",
                     email = "info@mirai-solutions.com"))
 Description: Allows users to compare version-controlled files in RStudio on
-  Linux with Meld through RStudio Addins.
+  Linux, Windows, or Mac with Meld through RStudio Addins.
 License: GPL-3
+Encoding: UTF-8
 LazyData: true
 NeedsCompilation: no
 Suggests:
@@ -18,7 +21,7 @@ Suggests:
 SystemRequirements:
     Meld
 URL: http://www.mirai-solutions.com,
-  https://github.com/miraisolutions/miscellaneous/compareWith
-BugReports: https://github.com/miraisolutions/miscellaneous/compareWith/issues
+  https://github.com/miraisolutions/compareWith
+BugReports: https://github.com/miraisolutions/compareWith/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
