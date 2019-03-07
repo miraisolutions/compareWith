@@ -11,7 +11,7 @@ Authors@R: c(person("Roland", "Schmid", role = c("aut"),
                     email = "info@mirai-solutions.com"))
 Description: Allows users to compare version-controlled files in RStudio on
   Linux, Windows, or Mac with Meld through RStudio Addins.
-Depends: R (>= 3.5.2)
+Depends: R (>= 3.0.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
