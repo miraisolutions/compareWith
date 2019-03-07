@@ -1,5 +1,7 @@
 #' Version-control comparison of files
 #'
+#' @rdname compare_with
+#'
 #' @return Invisibly returns the result of the meld command.
 #'
 #' @details `compare_with_neighbor` starts the file search in the directory of
@@ -21,7 +23,10 @@ compare_with <- function() {
 }
 
 
-#' @rdname compare_with
+#' Compare with neighbor
+#'
+#' @rdname compare_with_neighbor
+#'
 #' @export
 #'
 #' @examples
@@ -37,7 +42,9 @@ compare_with_neighbor <- function() {
 }
 
 
-#' @rdname compare_with
+#' Compare with repo
+#'
+#' @rdname compare_with_repo
 #'
 #' @details `compare_with_repo` and `compare_project_with_repo` compare the
 #'   current file and RStudio project with the version control repository
@@ -55,7 +62,9 @@ compare_with_repo <- function() {
 }
 
 
-#' @rdname compare_with
+#' Compare with repo (project)
+#'
+#' @rdname compare_project_with_repo
 #'
 #' @export
 #'
@@ -69,7 +78,15 @@ compare_project_with_repo <- function() {
   compare_meld(project_dir)
 }
 
-
+#' Compare meld
+#'
+#' @rdname compare_meld
+#'
+#' @param file_1 First file to compare.
+#' @param file_2 Second file to compare.
+#'
+#' @examples
+#' \dontrun{compare_meld()}
 compare_meld <- function(file_1, file_2 = NULL) {
   ret <- system2("meld", args = c(file_1, file_2), wait = FALSE)
   invisible(ret)

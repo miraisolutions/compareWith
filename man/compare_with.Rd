@@ -2,18 +2,9 @@
 % Please edit documentation in R/compare.R
 \name{compare_with}
 \alias{compare_with}
-\alias{compare_with_neighbor}
-\alias{compare_with_repo}
-\alias{compare_project_with_repo}
 \title{Version-control comparison of files}
 \usage{
 compare_with()
-
-compare_with_neighbor()
-
-compare_with_repo()
-
-compare_project_with_repo()
 }
 \value{
 Invisibly returns the result of the meld command.
@@ -25,14 +16,7 @@ Version-control comparison of files
 \code{compare_with_neighbor} starts the file search in the directory of
 the first file, while \code{compare_with} starts the file search in the working
 directory.
-
-\code{compare_with_repo} and \code{compare_project_with_repo} compare the
-current file and RStudio project with the version control repository
-version.
 }
 \examples{
 \dontrun{compare_with()}
-\dontrun{compare_with_neighbor()}
-\dontrun{compare_with_repo()}
-\dontrun{compare_project_with_repo()}
 }
