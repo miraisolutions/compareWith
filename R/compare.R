@@ -13,12 +13,16 @@
 #' @examples
 #' \dontrun{compare_with()}
 compare_with <- function() {
-  file_1 <- normalizePath(
-    rstudioapi::getSourceEditorContext()$path
-  )
-  file_2 <- normalizePath(
-    rstudioapi::selectFile(path = ".", filter = "*.*")
-  )
+  if(!is.null(rstudioapi::getSourceEditorContext()$path)) {
+    file_1 <- normalizePath(
+      rstudioapi::getSourceEditorContext()$path
+    )
+    file_2 <- normalizePath(
+      rstudioapi::selectFile(path = ".", filter = "*.*")
+    )
+  } else {
+    message("'Compare with...' requires file path. Please open a file in the editor to allow comparison.")
+  }
   compare_meld(file_1, file_2)
 }
 
@@ -32,12 +36,16 @@ compare_with <- function() {
 #' @examples
 #' \dontrun{compare_with_neighbor()}
 compare_with_neighbor <- function() {
-  file_1 <- normalizePath(
-    rstudioapi::getSourceEditorContext()$path
-  )
-  file_2 <- normalizePath(
-    rstudioapi::selectFile(path = dirname(file_1), filter = "*.*")
-  )
+  if(!is.null(rstudioapi::getSourceEditorContext()$path)) {
+    file_1 <- normalizePath(
+      rstudioapi::getSourceEditorContext()$path
+    )
+    file_2 <- normalizePath(
+      rstudioapi::selectFile(path = dirname(file_1), filter = "*.*")
+    )
+  } else {
+    message("'Compare with neighbor...' requires file path. Please open a file in the editor to allow comparison.")
+  }
   compare_meld(file_1, file_2)
 }
 
@@ -55,10 +63,14 @@ compare_with_neighbor <- function() {
 #' @examples
 #' \dontrun{compare_with_repo()}
 compare_with_repo <- function() {
-  file <- normalizePath(
-    rstudioapi::getSourceEditorContext()$path
-  )
-  compare_meld(file)
+  if(!is.null(rstudioapi::getSourceEditorContext()$path)) {
+    file_1 <- normalizePath(
+      rstudioapi::getSourceEditorContext()$path
+    )
+  } else {
+    message("'Compare with repo' requires file path. Please open a file in the editor to allow comparison.")
+  }
+  compare_meld(file_1)
 }
 
 
