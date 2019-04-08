@@ -8,6 +8,12 @@ output:
 
 # **compareWith**: RStudio addin with VCS capabilities
 
+compareWith provides user-friendly addins that enable and improve tasks that are otherwise difficult or impossible without any custom extension. Examples include:
+
+  - compare differences prior to commit, for single active files or the wholeproject; 
+  - resolve and merge conflicts via three-way comparison; 
+  - compare 2 distinct files with each other.  
+
 ## Installation
 
 You can install **compareWith** from GitHub using the `remotes` package:
