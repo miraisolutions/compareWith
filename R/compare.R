@@ -1,3 +1,4 @@
+
 #' Version-control comparison of files
 #'
 #' @rdname compare_with
@@ -13,16 +14,13 @@
 #' @examples
 #' \dontrun{compare_with()}
 compare_with <- function() {
-  if(!is.null(rstudioapi::getSourceEditorContext()$path)) {
-    file_1 <- normalizePath(
-      rstudioapi::getSourceEditorContext()$path
-    )
-    file_2 <- normalizePath(
-      rstudioapi::selectFile(path = ".", filter = "*.*")
-    )
-  } else {
-    message("'Compare with...' requires file path. Please open a file in the editor to allow comparison.")
-  }
+
+  addin = "Compare with..."
+  file_1 <- normalizePath(get_active_file(addin))
+  file_2 <- normalizePath(
+    select_file(path = ".", filter = "*.*", addin)
+  )
+
   compare_meld(file_1, file_2)
 }
 
@@ -36,16 +34,13 @@ compare_with <- function() {
 #' @examples
 #' \dontrun{compare_with_neighbor()}
 compare_with_neighbor <- function() {
-  if(!is.null(rstudioapi::getSourceEditorContext()$path)) {
-    file_1 <- normalizePath(
-      rstudioapi::getSourceEditorContext()$path
-    )
-    file_2 <- normalizePath(
-      rstudioapi::selectFile(path = dirname(file_1), filter = "*.*")
-    )
-  } else {
-    message("'Compare with neighbor...' requires file path. Please open a file in the editor to allow comparison.")
-  }
+
+  addin = "Compare with neighbor..."
+  file_1 <- normalizePath(get_active_file(addin))
+  file_2 <- normalizePath(
+    select_file(path = dirname(file_1), filter = "*.*", addin)
+  )
+
   compare_meld(file_1, file_2)
 }
 
@@ -63,14 +58,11 @@ compare_with_neighbor <- function() {
 #' @examples
 #' \dontrun{compare_with_repo()}
 compare_with_repo <- function() {
-  if(!is.null(rstudioapi::getSourceEditorContext()$path)) {
-    file_1 <- normalizePath(
-      rstudioapi::getSourceEditorContext()$path
-    )
-  } else {
-    message("'Compare with repo' requires file path. Please open a file in the editor to allow comparison.")
-  }
-  compare_meld(file_1)
+
+  addin = "Compare with repo"
+  file <- normalizePath(get_active_file(addin))
+
+  compare_meld(file)
 }
 
 
@@ -83,10 +75,12 @@ compare_with_repo <- function() {
 #' @examples
 #' \dontrun{compare_project_with_repo()}
 compare_project_with_repo <- function() {
+
   project_dir <- rstudioapi::getActiveProject()
   if (is.null(project_dir)) {
     stop("No active RStudio project detected.")
   }
+
   compare_meld(project_dir)
 }
 
@@ -102,4 +96,29 @@ compare_project_with_repo <- function() {
 compare_meld <- function(file_1, file_2 = NULL) {
   ret <- system2("meld", args = c(file_1, file_2), wait = FALSE)
   invisible(ret)
+}
+
+# Returns active file path, triggers error message if null
+get_active_file <- function (addin) {
+  file <- rstudioapi::getSourceEditorContext()$path
+  stop_if_null(file, paste(addin, "requires an active file (open and selected in the editor)."))
+}
+
+# Returns comparison file path, triggers error message if null
+select_file <- function(path, addin, ...) {
+  file <- rstudioapi::selectFile(path, ...)
+  stop_if_null(file, addin_msg(addin, "requires a file to be selected from the directory."))
+}
+
+# Generates error message
+addin_msg <- function(addin, msg) {
+  sprintf("'%s' %s", addin, msg)
+}
+
+# Stops function if input is null
+stop_if_null <- function(x, msg) {
+  if (is.null(x)) {
+    stop(msg, call. = FALSE)
+  }
+  invisible(x)
 }

@@ -15,5 +15,5 @@ compare_meld(file_1, file_2 = NULL)
 Compare meld
 }
 \examples{
-\dontrun{compare_project_with_repo()}
+\dontrun{compare_meld()}
 }
