@@ -88,6 +88,25 @@ compare_project_with_repo <- function() {
 #' @examples
 #' \dontrun{compare_meld()}
 compare_meld <- function(file_1, file_2 = NULL) {
-  ret <- system2("meld", args = c(file_1, file_2), wait = FALSE)
+  return_version()
+  ret <- system2("meld", args = c(file_1, file_2), stdout = TRUE, wait = FALSE)
   invisible(ret)
+}
+
+# Returns meld version or warning message if meld is not installed
+return_version <- function() {
+  w <- 0
+  withCallingHandlers(
+    system2("meld", "--version"),
+    warning = function(x) {
+      w <<- 1
+      invokeRestart("muffleWarning")
+    }
+  )
+
+  if(w == 1) {
+    stop("Meld is not installed on this computer. Please follow instructions on README.", call. = FALSE)
+  } else {
+    system2("meld", "--version")
+  }
 }
