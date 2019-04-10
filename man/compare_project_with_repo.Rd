@@ -7,7 +7,7 @@
 compare_project_with_repo()
 }
 \description{
-Compare with repo (project)
+Compare active project with version control repository.
 }
 \examples{
 \dontrun{compare_project_with_repo()}

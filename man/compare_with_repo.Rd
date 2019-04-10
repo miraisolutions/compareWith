@@ -7,7 +7,7 @@
 compare_with_repo()
 }
 \description{
-Compare with repo
+Compare active file with version control repository.
 }
 \details{
 \code{compare_with_repo} and \code{compare_project_with_repo} compare the

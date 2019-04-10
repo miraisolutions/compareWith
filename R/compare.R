@@ -3,6 +3,8 @@
 #'
 #' @rdname compare_with
 #'
+#' @description Compare active file with other file (search working directory).
+#'
 #' @return Invisibly returns the result of the meld command.
 #'
 #' @details `compare_with_neighbor` starts the file search in the directory of
@@ -29,6 +31,8 @@ compare_with <- function() {
 #'
 #' @rdname compare_with_neighbor
 #'
+#' @description Compare active file with other file (search same directory).
+#'
 #' @export
 #'
 #' @examples
@@ -48,6 +52,8 @@ compare_with_neighbor <- function() {
 #' Compare with repo
 #'
 #' @rdname compare_with_repo
+#'
+#' @description Compare active file with version control repository.
 #'
 #' @details `compare_with_repo` and `compare_project_with_repo` compare the
 #'   current file and RStudio project with the version control repository
@@ -69,6 +75,8 @@ compare_with_repo <- function() {
 #' Compare with repo (project)
 #'
 #' @rdname compare_project_with_repo
+#'
+#' @description Compare active project with version control repository.
 #'
 #' @export
 #'
