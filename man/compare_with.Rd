@@ -10,7 +10,7 @@ compare_with()
 Invisibly returns the result of the meld command.
 }
 \description{
-Version-control comparison of files
+Compare active file with other file (search working directory).
 }
 \details{
 \code{compare_with_neighbor} starts the file search in the directory of
