@@ -17,7 +17,7 @@
 #' \dontrun{compare_with()}
 compare_with <- function() {
 
-  addin = "Compare with..."
+  addin <- "Compare with..."
   file_1 <- normalizePath(get_active_file(addin))
   file_2 <- normalizePath(
     select_file(path = ".", filter = "*.*", addin)
@@ -39,7 +39,7 @@ compare_with <- function() {
 #' \dontrun{compare_with_neighbor()}
 compare_with_neighbor <- function() {
 
-  addin = "Compare with neighbor..."
+  addin <- "Compare with neighbor..."
   file_1 <- normalizePath(get_active_file(addin))
   file_2 <- normalizePath(
     select_file(path = dirname(file_1), filter = "*.*", addin)
@@ -65,7 +65,7 @@ compare_with_neighbor <- function() {
 #' \dontrun{compare_with_repo()}
 compare_with_repo <- function() {
 
-  addin = "Compare with repo"
+  addin <- "Compare with repo"
   file <- normalizePath(get_active_file(addin))
 
   compare_meld(file)
@@ -84,6 +84,7 @@ compare_with_repo <- function() {
 #' \dontrun{compare_project_with_repo()}
 compare_project_with_repo <- function() {
 
+  addin <- "Compare with repo (project)"
   project_dir <- rstudioapi::getActiveProject()
   stop_if_null(project_dir, "No active RStudio project detected.")
 
@@ -104,24 +105,24 @@ compare_meld <- function(file_1, file_2 = NULL) {
   invisible(ret)
 }
 
-# Returns active file path, triggers error message if null
+# Return active file path, trigger an error message if null
 get_active_file <- function (addin) {
   file <- rstudioapi::getSourceEditorContext()$path
   stop_if_null(file, paste(addin, "requires an active file (open and selected in the editor)."))
 }
 
-# Returns comparison file path, triggers error message if null
+# Return comparison file path, trigger an error message if null
 select_file <- function(path, addin, ...) {
   file <- rstudioapi::selectFile(path, ...)
   stop_if_null(file, addin_msg(addin, "requires a second file to compare."))
 }
 
-# Generates error message
+# Construct error message
 addin_msg <- function(addin, msg) {
   sprintf("'%s' %s", addin, msg)
 }
 
-# Stops function if input is null
+# Check if input is null and stop with a message
 stop_if_null <- function(x, msg) {
   if (is.null(x)) {
     stop(msg, call. = FALSE)
