@@ -7,7 +7,7 @@
 compare_with_neighbor()
 }
 \description{
-Compare with neighbor
+Compare active file with other file (search same directory).
 }
 \examples{
 \dontrun{compare_with_neighbor()}
