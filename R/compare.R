@@ -77,9 +77,7 @@ compare_with_repo <- function() {
 compare_project_with_repo <- function() {
 
   project_dir <- rstudioapi::getActiveProject()
-  if (is.null(project_dir)) {
-    stop("No active RStudio project detected.")
-  }
+  stop_if_null(project_dir, "No active RStudio project detected.")
 
   compare_meld(project_dir)
 }
@@ -107,7 +105,7 @@ get_active_file <- function (addin) {
 # Returns comparison file path, triggers error message if null
 select_file <- function(path, addin, ...) {
   file <- rstudioapi::selectFile(path, ...)
-  stop_if_null(file, addin_msg(addin, "requires a file to be selected from the directory."))
+  stop_if_null(file, addin_msg(addin, "requires a second file to compare."))
 }
 
 # Generates error message
