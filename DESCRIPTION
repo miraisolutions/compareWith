@@ -1,9 +1,9 @@
 Package: compareWith
-Title: Compare and Merge Tools for RStudio with Meld
+Title: Compare and Merge Tools for RStudio
 Version: 0.0.1
 Authors@R: c(person("Roland", "Schmid", role = c("aut"),
                     email = "roland.schmid@mirai-solutions.com"),
-             person("Riccardo", "Porreca", role = ("ctb"),
+             person("Riccardo", "Porreca", role = ("aut"),
                     email = "riccardo.porreca@mirai-solutions.com"),
              person("Nicoletta", "Farabullini", role = c("aut", "cre"),
                     email = "nicoletta.farabullini@mirai-solutions.com"),
@@ -24,8 +24,8 @@ Suggests:
     rmarkdown,
     rstudioapi
 SystemRequirements:
-    Meld
-URL: http://www.mirai-solutions.com,
+    meld
+URL: https://mirai-solutions.ch,
   https://github.com/miraisolutions/compareWith
 BugReports: https://github.com/miraisolutions/compareWith/issues
 VignetteBuilder: knitr
