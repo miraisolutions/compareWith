@@ -20,9 +20,9 @@ knitr::opts_chunk$set(
 
 Tasks **compareWith** greatly helps with include:
 
-- compare differences prior to commit, for individual files or the whole project.
-- inspect and resolve merge conflicts via three-way comparison.
-- compare two distinct files with each other.
+- Compare differences prior to commit, for individual files or the whole project.
+- Inspect and resolve merge conflicts via three-way comparison.
+- Compare two distinct files with each other.
 
 The package relies on [**Meld**](http://meldmerge.org/), a common visual diff and merge tool.
 
@@ -38,7 +38,7 @@ The required dependency [Meld](http://meldmerge.org) is available for most Linux
 
 On **Windows**, its installation is supported by an MSI installer, downloadable from the Meld website. After installation, you may have to add the location of the installed `meld.exe` to the `PATH` environment variable.
 
-Meld is not yet officially supported on **MacOS**. However, it can be installed via MacPorts, Fink or Brew.
+Meld is not yet officially supported on **MacOS**. However, it can be installed via MacPorts, Fink or Brew, making sure `meld` can be launched from the command line.
 
 
 ## Usage
