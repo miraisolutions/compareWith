@@ -1,33 +1,27 @@
 Package: compareWith
 Title: Compare and Merge Tools for RStudio
 Version: 0.0.1
-Authors@R: c(person("Roland", "Schmid", role = c("aut"),
-                    email = "roland.schmid@mirai-solutions.com"),
-             person("Riccardo", "Porreca", role = ("aut"),
-                    email = "riccardo.porreca@mirai-solutions.com"),
-             person("Nicoletta", "Farabullini", role = c("aut", "cre"),
-                    email = "nicoletta.farabullini@mirai-solutions.com"),
-             person("Mirai Solutions GmbH", role = "cph",
-                    email = "info@mirai-solutions.com"))
+Authors@R: 
+    c(person("Roland", "Schmid", role = c("aut"),
+             email = "roland.schmid@mirai-solutions.com"),
+      person("Riccardo", "Porreca", role = ("aut"),
+             email = "riccardo.porreca@mirai-solutions.com"),
+      person("Nicoletta", "Farabullini", role = c("aut", "cre"),
+             email = "nicoletta.farabullini@mirai-solutions.com"),
+      person("Mirai Solutions GmbH", role = "cph",
+             email = "info@mirai-solutions.com"))
 Description: Allows RStudio users to compare files with Meld
     through RStudio addins. This facilitates and streamlines performing
     diff and merge tasks from within RStudio, especially for projects
     under version control.
-Depends: R (>= 3.0.0)
 License: GPL-3
+URL: https://mirai-solutions.ch,
+    https://github.com/miraisolutions/compareWith#readme
+BugReports: https://github.com/miraisolutions/compareWith/issues
+SystemRequirements: meld
+Imports:
+    rstudioapi
 Encoding: UTF-8
 LazyData: true
-NeedsCompilation: no
-Suggests:
-    knitr,
-    roxygen2,
-    rmarkdown,
-    rstudioapi
-SystemRequirements:
-    meld
-URL: https://mirai-solutions.ch,
-  https://github.com/miraisolutions/compareWith
-BugReports: https://github.com/miraisolutions/compareWith/issues
-VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
