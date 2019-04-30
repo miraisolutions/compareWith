@@ -86,7 +86,7 @@ compare_project_with_repo <- function() {
 
   addin <- "Compare with repo (project)"
   project_dir <- rstudioapi::getActiveProject()
-  stop_if_null(project_dir, "No active RStudio project detected.")
+  stop_if_null(project_dir, addin_msg(addin, "requires an active RStudio project."))
 
   compare_meld(project_dir)
 }
