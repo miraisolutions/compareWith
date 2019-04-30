@@ -106,14 +106,14 @@ compare_meld <- function(file_1, file_2 = NULL) {
 }
 
 # Return active file path, trigger an error message if null
-get_active_file <- function (addin) {
+get_active_file <- function(addin) {
   file <- rstudioapi::getSourceEditorContext()$path
   stop_if_null(file, paste(addin, "requires an active file (open and selected in the editor)."))
 }
 
 # Return comparison file path, trigger an error message if null
 select_file <- function(path, addin, ...) {
-  file <- rstudioapi::selectFile(path, ...)
+  file <- rstudioapi::selectFile(path = path, ...)
   stop_if_null(file, addin_msg(addin, "requires a second file to compare."))
 }
 
