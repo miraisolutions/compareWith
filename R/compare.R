@@ -1,14 +1,11 @@
 #' Version-control comparison of files
 #'
-#' @rdname compare_with
-#'
-#' @description Compare active file with other file (search working directory).
+#' Compares active file with another (search working directory). Functions are called using Addins.
 #'
 #' @return Invisibly returns the result of the meld command.
 #'
-#' @details `compare_with_neighbor` starts the file search in the directory of
-#'   the first file, while `compare_with` starts the file search in the working
-#'   directory.
+#' @describeIn compare_with compares active file with another (search working directory).
+#' @template addin-name 'compare with...'.
 #'
 #' @export
 #'
@@ -25,11 +22,8 @@ compare_with <- function() {
 }
 
 
-#' Compare with neighbor
-#'
-#' @rdname compare_with_neighbor
-#'
-#' @description Compare active file with other file (search same directory).
+#' @describeIn compare_with compares active file with another within
+#' the same directory. @template addin-name 'compare with neighbor...'.
 #'
 #' @export
 #'
@@ -46,15 +40,8 @@ compare_with_neighbor <- function() {
 }
 
 
-#' Compare with repo
-#'
-#' @rdname compare_with_repo
-#'
-#' @description Compare active file with version control repository.
-#'
-#' @details `compare_with_repo` and `compare_project_with_repo` compare the
-#'   current file and RStudio project with the version control repository
-#'   version.
+#' @describeIn compare_with compares the current file and RStudio project with
+#' the version control repository version. @template addin-name 'compare with repo'.
 #'
 #' @export
 #'
@@ -68,11 +55,9 @@ compare_with_repo <- function() {
 }
 
 
-#' Compare with repo (project)
-#'
-#' @rdname compare_project_with_repo
-#'
-#' @description Compare active project with version control repository.
+#' @describeIn compare_with compares the current file and RStudio
+#' project with the version control repository version. @template addin-name
+#' 'compare with repo (project)'.
 #'
 #' @export
 #'
@@ -86,9 +71,8 @@ compare_project_with_repo <- function() {
   compare_meld(project_dir)
 }
 
-#' Compare meld
-#'
-#' @rdname compare_meld
+
+#' @describeIn compare_with calls meld.
 #'
 #' @param file_1 First file to compare.
 #' @param file_2 Second file to compare.

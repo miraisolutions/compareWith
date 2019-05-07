@@ -2,21 +2,54 @@
 % Please edit documentation in R/compare.R
 \name{compare_with}
 \alias{compare_with}
+\alias{compare_with_neighbor}
+\alias{compare_with_repo}
+\alias{compare_project_with_repo}
+\alias{compare_meld}
 \title{Version-control comparison of files}
 \usage{
 compare_with()
+
+compare_with_neighbor()
+
+compare_with_repo()
+
+compare_project_with_repo()
+
+compare_meld(file_1, file_2 = NULL)
+}
+\arguments{
+\item{file_1}{First file to compare.}
+
+\item{file_2}{Second file to compare.}
 }
 \value{
 Invisibly returns the result of the meld command.
 }
 \description{
-Compare active file with other file (search working directory).
+Compares active file with another (search working directory). Functions are called using Addins.
 }
-\details{
-\code{compare_with_neighbor} starts the file search in the directory of
-the first file, while \code{compare_with} starts the file search in the working
-directory.
-}
+\section{Functions}{
+\itemize{
+\item \code{compare_with}: compares active file with another (search working directory).
+
+\item \code{compare_with_neighbor}: compares active file with another within
+the same directory. @template addin-name 'compare with neighbor...'.
+
+\item \code{compare_with_repo}: compares the current file and RStudio project with
+the version control repository version. @template addin-name 'compare with repo'.
+
+\item \code{compare_project_with_repo}: compares the current file and RStudio
+project with the version control repository version. @template addin-name
+'compare with repo (project)'.
+
+\item \code{compare_meld}: 
+}}
+
 \examples{
 \dontrun{compare_with()}
+\dontrun{compare_with_neighbor()}
+\dontrun{compare_with_repo()}
+\dontrun{compare_project_with_repo()}
+\dontrun{compare_meld()}
 }
