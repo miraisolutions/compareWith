@@ -31,19 +31,15 @@ Compares active file with another (search working directory). Functions are call
 }
 \section{Functions}{
 \itemize{
-\item \code{compare_with}: compares active file with another (search working directory).
+\item \code{compare_with}: compares active file with another (search working directory). Serves as binding for addin 'Compare with...'.
 
-\item \code{compare_with_neighbor}: compares active file with another within
-the same directory. @template addin-name 'compare with neighbor...'.
+\item \code{compare_with_neighbor}: compares active file with another within the same directory. Serves as binding for addin 'Compare with neighbor...'.
 
-\item \code{compare_with_repo}: compares the current file and RStudio project with
-the version control repository version. @template addin-name 'compare with repo'.
+\item \code{compare_with_repo}: compares the current file and RStudio project with the version control repository version. Serves as binding for addin 'Compare with repo'.
 
-\item \code{compare_project_with_repo}: compares the current file and RStudio
-project with the version control repository version. @template addin-name
-'compare with repo (project)'.
+\item \code{compare_project_with_repo}: compares the current file and RStudio project with the version control repository version. Serves as binding for addin 'Compare with repo (project)'.
 
-\item \code{compare_meld}: 
+\item \code{compare_meld}: calls meld.
 }}
 
 \examples{

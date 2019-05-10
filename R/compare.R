@@ -4,8 +4,9 @@
 #'
 #' @return Invisibly returns the result of the meld command.
 #'
-#' @describeIn compare_with compares active file with another (search working directory).
-#' @template addin-name 'compare with...'.
+#' @templateVar desc compares active file with another (search working directory).
+#' @templateVar addin Compare with...
+#' @template describeIn-addin-func
 #'
 #' @export
 #'
@@ -22,8 +23,9 @@ compare_with <- function() {
 }
 
 
-#' @describeIn compare_with compares active file with another within
-#' the same directory. @template addin-name 'compare with neighbor...'.
+#' @templateVar desc compares active file with another within the same directory.
+#' @templateVar addin Compare with neighbor...
+#' @template describeIn-addin-func
 #'
 #' @export
 #'
@@ -40,8 +42,9 @@ compare_with_neighbor <- function() {
 }
 
 
-#' @describeIn compare_with compares the current file and RStudio project with
-#' the version control repository version. @template addin-name 'compare with repo'.
+#' @templateVar desc compares the current file and RStudio project with the version control repository version.
+#' @templateVar addin Compare with repo
+#' @template describeIn-addin-func
 #'
 #' @export
 #'
@@ -55,9 +58,9 @@ compare_with_repo <- function() {
 }
 
 
-#' @describeIn compare_with compares the current file and RStudio
-#' project with the version control repository version. @template addin-name
-#' 'compare with repo (project)'.
+#' @templateVar desc compares the current file and RStudio project with the version control repository version.
+#' @templateVar addin Compare with repo (project)
+#' @template describeIn-addin-func
 #'
 #' @export
 #'
