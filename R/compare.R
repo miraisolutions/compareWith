@@ -18,10 +18,8 @@
 compare_with <- function() {
 
   addin <- "Compare with..."
-  file_1 <- normalizePath(get_active_file(addin))
-  file_2 <- normalizePath(
-    select_file(path = ".", filter = "*.*", addin)
-  )
+  file_1 <- get_active_file(addin)
+  file_2 <- select_file(path = ".", addin)
 
   compare_meld(file_1, file_2)
 }
@@ -38,10 +36,8 @@ compare_with <- function() {
 compare_with_neighbor <- function() {
 
   addin <- "Compare with neighbor..."
-  file_1 <- normalizePath(get_active_file(addin))
-  file_2 <- normalizePath(
-    select_file(path = dirname(file_1), filter = "*.*", addin)
-  )
+  file_1 <- get_active_file(addin)
+  file_2 <- select_file(path = dirname(file_1), addin)
 
   compare_meld(file_1, file_2)
 }
@@ -58,7 +54,7 @@ compare_with_neighbor <- function() {
 compare_with_repo <- function() {
 
   addin <- "Compare with repo"
-  file <- normalizePath(get_active_file(addin))
+  file <- get_active_file(addin)
 
   compare_meld(file)
 }
@@ -85,8 +81,15 @@ compare_project_with_repo <- function() {
 # Calls Meld, consider exposing this with full `meld` capability covering 3-way
 # comparison, see `meld --help`
 compare_meld <- function(file_1, file_2 = NULL) {
-  ret <- system2("meld", args = c(file_1, file_2), wait = FALSE)
+  ret <- system2("meld", args = c(shPath(file_1), shPath(file_2)), wait = FALSE)
   invisible(ret)
+}
+
+# Creates quoted path in canonical form for OS shell usage
+shPath <- function(path) {
+  if (!is.null(path)) {
+    shQuote(normalizePath(path, mustWork = TRUE))
+  }
 }
 
 # Returns active file path, trigger an error message if null
