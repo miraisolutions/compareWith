@@ -1,9 +1,11 @@
 
 #' Version-control comparison of files
 #'
-#' Compares active file with another (search working directory). Functions are called using Addins.
+#' Compare active files or projects against local or version control repository
+#' items. Functions are called by the \pkg{compareWith} addins.
 #'
-#' @return Invisibly returns the result of the meld command.
+#' @return Invisibly returns the result of calling the `meld` command via
+#'   [system2()].
 #'
 #' @templateVar desc compares active file with another (search working directory).
 #' @templateVar addin Compare with...
@@ -25,7 +27,7 @@ compare_with <- function() {
 }
 
 
-#' @templateVar desc compares active file with another within the same directory.
+#' @templateVar desc compares active file with another (search same directory).
 #' @templateVar addin Compare with neighbor...
 #' @template describeIn-addin-func
 #'
@@ -45,7 +47,7 @@ compare_with_neighbor <- function() {
 }
 
 
-#' @templateVar desc compares the current file and RStudio project with the version control repository version.
+#' @templateVar desc compares active file with the version control repository.
 #' @templateVar addin Compare with repo
 #' @template describeIn-addin-func
 #'
@@ -62,7 +64,7 @@ compare_with_repo <- function() {
 }
 
 
-#' @templateVar desc compares the current file and RStudio project with the version control repository version.
+#' @templateVar desc compares active RStudio project with the version control repository.
 #' @templateVar addin Compare with repo (project)
 #' @template describeIn-addin-func
 #'
@@ -80,36 +82,31 @@ compare_project_with_repo <- function() {
 }
 
 
-#' @describeIn compare_with calls meld.
-#'
-#' @param file_1 First file to compare.
-#' @param file_2 Second file to compare.
-#'
-#' @examples
-#' \dontrun{compare_meld()}
+# Calls Meld, consider exposing this with full `meld` capability covering 3-way
+# comparison, see `meld --help`
 compare_meld <- function(file_1, file_2 = NULL) {
   ret <- system2("meld", args = c(file_1, file_2), wait = FALSE)
   invisible(ret)
 }
 
-# Return active file path, trigger an error message if null
+# Returns active file path, trigger an error message if null
 get_active_file <- function(addin) {
   file <- rstudioapi::getSourceEditorContext()$path
   stop_if_null(file, paste(addin, "requires an active file (open and selected in the editor)."))
 }
 
-# Return comparison file path, trigger an error message if null
+# Returns comparison file path, trigger an error message if null
 select_file <- function(path, addin, ...) {
   file <- rstudioapi::selectFile(path = path, ...)
   stop_if_null(file, addin_msg(addin, "requires a second file to compare."))
 }
 
-# Construct error message
+# Constructs error message
 addin_msg <- function(addin, msg) {
   sprintf("'%s' %s", addin, msg)
 }
 
-# Check if input is null and stop with a message
+# Checks if input is null and stop with a message
 stop_if_null <- function(x, msg) {
   if (is.null(x)) {
     stop(msg, call. = FALSE)

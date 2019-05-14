@@ -5,7 +5,6 @@
 \alias{compare_with_neighbor}
 \alias{compare_with_repo}
 \alias{compare_project_with_repo}
-\alias{compare_meld}
 \title{Version-control comparison of files}
 \usage{
 compare_with()
@@ -15,31 +14,24 @@ compare_with_neighbor()
 compare_with_repo()
 
 compare_project_with_repo()
-
-compare_meld(file_1, file_2 = NULL)
-}
-\arguments{
-\item{file_1}{First file to compare.}
-
-\item{file_2}{Second file to compare.}
 }
 \value{
-Invisibly returns the result of the meld command.
+Invisibly returns the result of calling the \code{meld} command via
+\code{\link[=system2]{system2()}}.
 }
 \description{
-Compares active file with another (search working directory). Functions are called using Addins.
+Compare active files or projects against local or version control repository
+items. Functions are called by the \pkg{compareWith} addins.
 }
 \section{Functions}{
 \itemize{
 \item \code{compare_with}: compares active file with another (search working directory). Serves as binding for addin 'Compare with...'.
 
-\item \code{compare_with_neighbor}: compares active file with another within the same directory. Serves as binding for addin 'Compare with neighbor...'.
+\item \code{compare_with_neighbor}: compares active file with another (search same directory). Serves as binding for addin 'Compare with neighbor...'.
 
-\item \code{compare_with_repo}: compares the current file and RStudio project with the version control repository version. Serves as binding for addin 'Compare with repo'.
+\item \code{compare_with_repo}: compares active file with the version control repository. Serves as binding for addin 'Compare with repo'.
 
-\item \code{compare_project_with_repo}: compares the current file and RStudio project with the version control repository version. Serves as binding for addin 'Compare with repo (project)'.
-
-\item \code{compare_meld}: calls meld.
+\item \code{compare_project_with_repo}: compares active RStudio project with the version control repository. Serves as binding for addin 'Compare with repo (project)'.
 }}
 
 \examples{
@@ -47,5 +39,4 @@ Compares active file with another (search working directory). Functions are call
 \dontrun{compare_with_neighbor()}
 \dontrun{compare_with_repo()}
 \dontrun{compare_project_with_repo()}
-\dontrun{compare_meld()}
 }
