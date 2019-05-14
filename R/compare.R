@@ -88,7 +88,7 @@ compare_meld <- function(file_1, file_2 = NULL) {
 # Returns file path into canonical form, accepts file names with spaces
 shPath <- function(path) {
   if (!is.null(path)) {
-    shQuote(normalizePath(path))
+    shQuote(normalizePath(path, mustWork = TRUE))
   }
 }
 
