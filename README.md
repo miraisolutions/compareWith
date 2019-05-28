@@ -37,9 +37,19 @@ downloadable from the Meld website. After installation, you may have to
 add the location of the installed `meld.exe` to the `PATH` environment
 variable.
 
-Meld is not yet officially supported on **MacOS**. However, it can be
-installed via MacPorts, Fink or Brew, making sure `meld` can be launched
-from the command line.
+Meld is not yet officially supported on **MacOS**. However, pre-built
+binaries [are available](https://github.com/yousseb/meld/releases) as
+`meldmerge.dmg` images for new and old releases of Meld. We currently
+recommend using Meld **3.16.0**, as newer versions do not appear to be
+stable. After installation, you need make sure `meld` can be launched
+from the command line, e.g. via:
+
+``` bash
+ln -s /Applications/Meld.app/Contents/MacOS/Meld /usr/local/bin/meld
+```
+
+Meld can also be installed via MacPorts, Fink or Brew, where however it
+might be difficult to switch to an older stable version.
 
 ## Usage
 
