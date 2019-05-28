@@ -41,13 +41,16 @@ Meld is not yet officially supported on **MacOS**. However, it can be
 installed via MacPorts, Fink or Brew, making sure `meld` can be launched
 from the command line.
 
-Meld 3.16.0 can be installed downloading the "meldmerge.dmg" file [here](https://github.com/yousseb/meld/releases/tag/osx-9) . Then, type in a terminal:
+Meld 3.16.0 can be installed downloading the “meldmerge.dmg” file
+[here](https://github.com/yousseb/meld/releases/tag/osx-9) . Then, type
+in a terminal:
 
-``` r
+``` bash
 ln -s /Applications/Meld.app/Contents/MacOS/Meld /usr/local/bin/meld
 ```
 
-Note: Meld 3.16.0 is the recommended version at this time as 3.19.0 is not stable. 
+Note: Meld 3.16.0 is the recommended version at this time as 3.19.0 is
+not stable.
 
 ## Usage
 
