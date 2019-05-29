@@ -42,7 +42,7 @@ Meld is not yet officially supported on **MacOS**. However, pre-built
 binaries [are available](https://github.com/yousseb/meld/releases) as
 `meldmerge.dmg` images for new and old releases of Meld. We currently
 recommend using Meld **3.16.0**, as newer versions do not appear to be
-stable. After installation, you need make sure `meld` can be launched
+stable. After installation, you need to make sure `meld` can be launched
 from the command line, e.g. via:
 
 ``` bash
