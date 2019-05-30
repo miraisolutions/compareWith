@@ -3,6 +3,12 @@
 
 # compareWith: RStudio Addins for Enhanced Diff and Merge
 
+<!-- badges: start -->
+
+[![Travis build
+status](https://travis-ci.org/miraisolutions/compareWith.svg?branch=master)](https://travis-ci.org/miraisolutions/compareWith)
+<!-- badges: end -->
+
 **compareWith** is an R package providing user-friendly [RStudio
 addins](https://rstudio.github.io/rstudioaddins/) that make it easier to
 perform **diff** and **merge** tasks, compared to the limited
