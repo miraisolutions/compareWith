@@ -1,45 +1,29 @@
 
-#' Version-control comparison of files
+#' Comparison addins
 #'
 #' Compare active files or projects against local or version control repository
-#' items. Functions are called by the \pkg{compareWith} addins.
+#' items. Functions are used as bindings for the \pkg{compareWith} RStudio
+#' addins.
 #'
-#' @return Invisibly returns the result of calling the `meld` command via
-#'   [system2()].
+#' @template return-meld
 #'
-#' @templateVar desc compares active file with another (search working directory).
-#' @templateVar addin Compare with...
+#' @seealso Function [compare_with()] for the flexible comparison of files.
+#'
+#' @name compareWith-addins
+NULL
+
+#' @templateVar desc compares active file with another.
+#' @templateVar addin Compare with other...
 #' @template describeIn-addin-func
 #'
-#' @export
-#'
 #' @examples
-#' \dontrun{compare_with()}
-compare_with <- function() {
-
-  addin <- "Compare with..."
-  file_1 <- get_active_file(addin)
-  file_2 <- select_file(path = ".", addin)
-
-  compare_meld(file_1, file_2)
-}
-
-
-#' @templateVar desc compares active file with another (search same directory).
-#' @templateVar addin Compare with neighbor...
-#' @template describeIn-addin-func
+#' \dontrun{compare_with_other()}
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{compare_with_neighbor()}
-compare_with_neighbor <- function() {
+compare_with_other <- function() {
 
-  addin <- "Compare with neighbor..."
-  file_1 <- get_active_file(addin)
-  file_2 <- select_file(path = dirname(file_1), addin)
-
-  compare_meld(file_1, file_2)
+  addin <- "Compare with other..."
+  compare_with(caller = addin)
 }
 
 
@@ -47,16 +31,14 @@ compare_with_neighbor <- function() {
 #' @templateVar addin Compare with repo
 #' @template describeIn-addin-func
 #'
-#' @export
-#'
 #' @examples
 #' \dontrun{compare_with_repo()}
+#'
+#' @export
 compare_with_repo <- function() {
 
   addin <- "Compare with repo"
-  file <- get_active_file(addin)
-
-  compare_meld(file)
+  compare_with(path = NA, caller = addin)
 }
 
 
@@ -64,17 +46,83 @@ compare_with_repo <- function() {
 #' @templateVar addin Compare with repo (project)
 #' @template describeIn-addin-func
 #'
-#' @export
-#'
 #' @examples
 #' \dontrun{compare_project_with_repo()}
+#'
+#' @export
 compare_project_with_repo <- function() {
 
   addin <- "Compare with repo (project)"
   project_dir <- rstudioapi::getActiveProject()
-  stop_if_null(project_dir, addin_msg(addin, "requires an active RStudio project."))
+  stop_if_null(project_dir, info_msg(addin, "requires an active RStudio project."))
 
   compare_meld(project_dir)
+}
+
+
+
+#' File comparison
+#'
+#' Compare (active) `file` to a another selected by the user or to the version
+#' control repository.
+#'
+#' @param file Optional path to an existing file to be compared. If `NULL` (the
+#'   default), the active RStudio file is used.
+#' @param path Path of the initial directory for selecting the second file to
+#'   compare against via [selectFile()]. If `NULL` (the default), the directory
+#'   of the first `file` is used. Use `NA` to compare a `file` under version
+#'   control for with the repository version.
+#' @param caller String information about the caller, to customize error
+#'   messages.
+#'
+#' @template return-meld
+#'
+#' @seealso [RStudio addins][compareWith-addins] for file and project comparison
+#'   with support for version control.
+#'
+#' @examples
+#' \dontrun{
+#' # compare active file, select second file from the same directory
+#' compare_with()
+#' # compare active file, select second file from the working directory
+#' compare_with(path = getwd())
+#' # compare active file, select second file from the home directory
+#' compare_with(path = "~")
+#' # compare a given file, select second file from the working directory
+#' compare_with(file = "~/file1.ext", path = getwd())
+#' # compare a given file under version control with the repository version
+#' compare_with(file = "~/file1.ext", path = NA)
+#' # custom caller information upon error, e.g. from a wrapper function
+#' compare_home_dir <- function(file) {
+#'   compare_with(file, path = "~", caller = "compare_home_dir")
+#' }
+#' my_wrapper("non/existing/file") # customized error message
+#' }
+#'
+#' @export
+compare_with <- function(file = NULL, path = NULL, caller = NULL) {
+
+  if (is.null(caller)) {
+    # error messages customized for function "compare_with"
+    caller <- "compare_with"
+  }
+  if (is.null(file)) {
+    file <- get_active_file(caller)
+  }
+  if (!file.exists(file)) {
+    stop(info_msg(caller, "requires the path to an existing file"))
+  }
+  with <- if (!is.na(path)) { # NULL otherwise
+    if (is.null(path)) {
+      path <- dirname(file)
+    }
+    if (!dir.exists(path)) {
+      stop(info_msg(caller, "requires an existing path for selecting the second file"))
+    }
+    select_file(path = path, caller)
+  }
+
+  compare_meld(file, with)
 }
 
 
@@ -93,20 +141,20 @@ shPath <- function(path) {
 }
 
 # Returns active file path, trigger an error message if null
-get_active_file <- function(addin) {
+get_active_file <- function(caller) {
   file <- rstudioapi::getSourceEditorContext()$path
-  stop_if_null(file, paste(addin, "requires an active file (open and selected in the editor)."))
+  stop_if_null(file, info_msg(caller, "requires an active file (open and selected in the editor)."))
 }
 
 # Returns comparison file path, trigger an error message if null
-select_file <- function(path, addin, ...) {
+select_file <- function(path, caller, ...) {
   file <- rstudioapi::selectFile(path = path, ...)
-  stop_if_null(file, addin_msg(addin, "requires a second file to compare."))
+  stop_if_null(file, info_msg(caller, "requires a second file to compare."))
 }
 
 # Constructs error message
-addin_msg <- function(addin, msg) {
-  sprintf("'%s' %s", addin, msg)
+info_msg <- function(what, msg) {
+  sprintf("'%s' %s", what, msg)
 }
 
 # Checks if input is null and stop with a message

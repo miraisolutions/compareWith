@@ -1,1 +1,1 @@
-#' @describeIn compare_with <%= desc %> Serves as binding for addin '<%= addin %>'.
+#' @describeIn compareWith-addins <%= desc %> Serves as binding for addin '<%= addin %>'.

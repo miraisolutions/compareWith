@@ -2,41 +2,50 @@
 % Please edit documentation in R/compare.R
 \name{compare_with}
 \alias{compare_with}
-\alias{compare_with_neighbor}
-\alias{compare_with_repo}
-\alias{compare_project_with_repo}
-\title{Version-control comparison of files}
+\title{File comparison}
 \usage{
-compare_with()
+compare_with(file = NULL, path = NULL, caller = NULL)
+}
+\arguments{
+\item{file}{Optional path to an existing file to be compared. If \code{NULL} (the
+default), the active RStudio file is used.}
 
-compare_with_neighbor()
+\item{path}{Path of the initial directory for selecting the second file to
+compare against via \code{\link[=selectFile]{selectFile()}}. If \code{NULL} (the default), the directory
+of the first \code{file} is used. Use \code{NA} to compare a \code{file} under version
+control for with the repository version.}
 
-compare_with_repo()
-
-compare_project_with_repo()
+\item{caller}{String information about the caller, to customize error
+messages.}
 }
 \value{
-Invisibly returns the result of calling the \code{meld} command via
-\code{\link[=system2]{system2()}}.
+Invisibly returns the result of calling \code{meld} via \code{\link[=system2]{system2()}}.
 }
 \description{
-Compare active files or projects against local or version control repository
-items. Functions are called by the \pkg{compareWith} addins.
+Compare (active) \code{file} to a another selected by the user or to the version
+control repository.
 }
-\section{Functions}{
-\itemize{
-\item \code{compare_with}: compares active file with another (search working directory). Serves as binding for addin 'Compare with...'.
-
-\item \code{compare_with_neighbor}: compares active file with another (search same directory). Serves as binding for addin 'Compare with neighbor...'.
-
-\item \code{compare_with_repo}: compares active file with the version control repository. Serves as binding for addin 'Compare with repo'.
-
-\item \code{compare_project_with_repo}: compares active RStudio project with the version control repository. Serves as binding for addin 'Compare with repo (project)'.
-}}
-
 \examples{
-\dontrun{compare_with()}
-\dontrun{compare_with_neighbor()}
-\dontrun{compare_with_repo()}
-\dontrun{compare_project_with_repo()}
+\dontrun{
+# compare active file, select second file from the same directory
+compare_with()
+# compare active file, select second file from the working directory
+compare_with(path = getwd())
+# compare active file, select second file from the home directory
+compare_with(path = "~")
+# compare a given file, select second file from the working directory
+compare_with(file = "~/file1.ext", path = getwd())
+# compare a given file under version control with the repository version
+compare_with(file = "~/file1.ext", path = NA)
+# custom caller information upon error, e.g. from a wrapper function
+compare_home_dir <- function(file) {
+  compare_with(file, path = "~", caller = "compare_home_dir")
+}
+my_wrapper("non/existing/file") # customized error message
+}
+
+}
+\seealso{
+\link[=compareWith-addins]{RStudio addins} for file and project comparison
+with support for version control.
 }

@@ -2,5 +2,5 @@
 
 export(compare_project_with_repo)
 export(compare_with)
-export(compare_with_neighbor)
+export(compare_with_other)
 export(compare_with_repo)
