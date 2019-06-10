@@ -34,6 +34,6 @@ test_that("A message is produced with the output of non-working Meld", {
   expect_message(
     # prevent error to test the message ooly
     tryCatch(check_meld_version(option = "--ver_sion"), error = invisible),
-    "Error.*option",
+    "error.*option", ignore.case = TRUE
   )
 })
