@@ -16,7 +16,7 @@ check_readme_msg <- c(
 # situations for testing
 check_meld_version <- function(meld = "meld", option = "--version") {
   out <- withCallingHandlers(
-    suppressWarnings(system2(meld, option, stdout = TRUE)),
+    suppressWarnings(system2(meld, option, stdout = TRUE, stderr = TRUE)),
     error = function(e) {
       stop(
         "Unable to detect a Meld installation.\n",
