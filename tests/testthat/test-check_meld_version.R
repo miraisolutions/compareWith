@@ -5,7 +5,7 @@ test_that("The Meld version is returned", {
   meld_ver <- expect_error(check_meld_version(), NA)
   # and possibly skip the other tests
   skip_if(inherits(meld_ver, "error"), "Error checking the Meld version")
-  # character string Meld + version
+  # we expect a character string with Meld + version
   expect_is(meld_ver, "character")
   expect_length(meld_ver, 1L)
   expect_match(
