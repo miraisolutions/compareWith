@@ -11,9 +11,9 @@ check_readme_msg <- c(
   "<https://github.com/miraisolutions/compareWith#installation>."
 )
 
-# Check Meld version, stop if Meld is not installed or there are issues
-# determining its version. Extra arguments allow mimicking error situations for
-# testing
+# Check (and return) Meld version, stop if Meld is not installed or there are
+# issues determining its version. Extra arguments allow mimicking error
+# situations for testing
 check_meld_version <- function(meld = "meld", option = "--version") {
   out <- withCallingHandlers(
     suppressWarnings(system2(meld, option, stdout = TRUE)),
@@ -38,8 +38,3 @@ check_meld_version <- function(meld = "meld", option = "--version") {
   # return the successful result of meld --version
   out
 }
-
-# TODO: Unit-test
-# check_meld_version() => expect [Mm]eld.*\d\\.\d
-# check_meld_version(meld = "me_ld") => expect_error
-# check_meld_version(option = "--ver_sion") => expect_error
