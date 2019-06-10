@@ -38,5 +38,5 @@ check_meld_version <- function(meld = "meld", option = "--version") {
   # return the successful result of meld --version; NOTE that, since we have
   # stderr = TRUE, possible warnings/error messages are also captured in `out`
   # (e.g. on Travis CI), therefore only pick the last element as the version
-  tail(out, 1L)
+  utils::tail(out, 1L)
 }
