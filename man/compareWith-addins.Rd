@@ -2,42 +2,20 @@
 % Please edit documentation in R/compare.R
 \name{compareWith-addins}
 \alias{compareWith-addins}
-\alias{compare_with_other}
-\alias{compare_with_repo}
-\alias{compare_project_with_repo}
 \title{Comparison addins}
-\usage{
-compare_with_other()
-
-compare_with_repo()
-
-compare_project_with_repo()
-}
-\value{
-Invisibly returns the result of calling \code{meld} via \code{\link[=system2]{system2()}}.
-}
 \description{
-Compare active files or projects against local or version control repository
-items. Functions are used as bindings for the \pkg{compareWith} RStudio
-addins.
+RStudio \href{https://rstudio.github.io/rstudioaddins/}{addins} for comparing
+active files or projects against local or version control repository items.
 }
-\section{Functions}{
-\itemize{
-\item \code{compare_with_other}: compares active file with another. Serves as binding for addin 'Compare with other...'.
+\section{Addins}{
 
-\item \code{compare_with_repo}: compares active file with the version control repository. Serves as binding for addin 'Compare with repo'.
-
-\item \code{compare_project_with_repo}: compares active RStudio project with the version control repository. Serves as binding for addin 'Compare with repo (project)'.
-}}
-
-\examples{
-\dontrun{compare_with_other()}
-
-\dontrun{compare_with_repo()}
-
-\dontrun{compare_project_with_repo()}
-
+\describe{
+\item{\strong{Compare with repo}}{Compare active file with version control repository.}
+\item{\strong{Compare with repo - project}}{Compare active project with version control repository.}
+\item{\strong{Compare with other...}}{Compare active file with another.}
 }
+}
+
 \seealso{
 Function \code{\link[=compare_with]{compare_with()}} for the flexible comparison of files.
 }

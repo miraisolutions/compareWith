@@ -1,64 +1,42 @@
 
 #' Comparison addins
 #'
-#' Compare active files or projects against local or version control repository
-#' items. Functions are used as bindings for the \pkg{compareWith} RStudio
-#' addins.
+#' RStudio [addins](https://rstudio.github.io/rstudioaddins/) for comparing
+#' active files or projects against local or version control repository items.
 #'
-#' @template return-meld
+#' @eval section_addins()
 #'
 #' @seealso Function [compare_with()] for the flexible comparison of files.
 #'
 #' @name compareWith-addins
 NULL
 
-#' @templateVar desc compares active file with another.
-#' @templateVar addin Compare with other...
-#' @template describeIn-addin-func
-#'
-#' @examples
-#' \dontrun{compare_with_other()}
-#'
-#' @export
-compare_with_other <- function() {
+
+# addin binding
+addin_other <- function() {
 
   addin <- "Compare with other..."
   compare_with(caller = addin)
 }
 
 
-#' @templateVar desc compares active file with the version control repository.
-#' @templateVar addin Compare with repo
-#' @template describeIn-addin-func
-#'
-#' @examples
-#' \dontrun{compare_with_repo()}
-#'
-#' @export
-compare_with_repo <- function() {
+# addin binding
+addin_repo <- function() {
 
   addin <- "Compare with repo"
   compare_with(path = NA, caller = addin)
 }
 
 
-#' @templateVar desc compares active RStudio project with the version control repository.
-#' @templateVar addin Compare with repo (project)
-#' @template describeIn-addin-func
-#'
-#' @examples
-#' \dontrun{compare_project_with_repo()}
-#'
-#' @export
-compare_project_with_repo <- function() {
+# addin binding
+addin_project <- function() {
 
-  addin <- "Compare with repo (project)"
+  addin <- "Compare with repo - project"
   project_dir <- rstudioapi::getActiveProject()
   stop_if_null(project_dir, info_msg(addin, "requires an active RStudio project."))
 
   compare_meld(project_dir)
 }
-
 
 
 #' File comparison
