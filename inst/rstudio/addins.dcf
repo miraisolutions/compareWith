@@ -3,7 +3,7 @@ Description: Compare active file with version control repository
 Binding: compare_with_repo
 Interactive: true
 
-Name: Compare with repo (project)
+Name: Compare with repo - project
 Description: Compare active project with version control repository
 Binding: compare_project_with_repo
 Interactive: true
