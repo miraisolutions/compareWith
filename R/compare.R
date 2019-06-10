@@ -4,54 +4,61 @@
 #' RStudio [addins](https://rstudio.github.io/rstudioaddins/) for comparing
 #' active files or projects against local or version control repository items.
 #'
-#' @eval section_addins()
+#' @eval man_section_addins()
 #'
-#' @seealso Function [compare_with()] for the flexible comparison of files.
+#' @seealso Functions [compare_with_other()] and [compare_with_repo()] for the
+#'   flexible comparison of files and directories.
 #'
 #' @name compareWith-addins
 NULL
 
+# Addin bindings (not exported), with addin-specific errors
 
-# addin binding
 addin_other <- function() {
-
-  addin <- "Compare with other..."
-  compare_with(caller = addin)
+  with_addin_errors(
+    addin = "Compare with other...",
+    compare_active_file_with_other()
+  )
 }
 
-
-# addin binding
 addin_repo <- function() {
-
-  addin <- "Compare with repo"
-  compare_with(path = NA, caller = addin)
+  with_addin_errors(
+    addin = "Compare with repo",
+    compare_active_file_with_repo()
+  )
 }
 
-
-# addin binding
 addin_project <- function() {
-
-  addin <- "Compare with repo - project"
-  project_dir <- rstudioapi::getActiveProject()
-  stop_if_null(project_dir, info_msg(addin, "requires an active RStudio project."))
-
-  compare_meld(project_dir)
+  with_addin_errors(
+    addin = "Compare with repo - project",
+    compare_project_with_repo()
+  )
 }
 
+# Handle addin-specific error messages
+addin_message <- function(addin, condition) {
+  sprintf("'%s' - %s", addin, condition$message)
+}
+with_addin_errors <- function(expr, addin) {
+  withCallingHandlers(
+    expr,
+    error = function(e) {
+      stop(addin_message(addin, e), call. = FALSE)
+    }
+  )
+}
+# with_addin_errors(stop("Not good"), "My Addin")
 
-#' File comparison
+
+#' File and directory comparison
 #'
-#' Compare (active) `file` to a another selected by the user or to the version
+#' Compare file or directory to another selected by the user or to the version
 #' control repository.
 #'
-#' @param file Optional path to an existing file to be compared. If `NULL` (the
-#'   default), the active RStudio file is used.
-#' @param path Path of the initial directory for selecting the second file to
-#'   compare against via [selectFile()]. If `NULL` (the default), the directory
-#'   of the first `file` is used. Use `NA` to compare a `file` under version
-#'   control for with the repository version.
-#' @param caller String information about the caller, to customize error
-#'   messages.
+#' @param path Path to an existing file or directory to be compared.
+#' @param location Path of the initial directory for selecting the other file to
+#'   compare against via [selectFile()]. If `NULL` (the default), the parent
+#'   directory of the input  `path` is used.
 #'
 #' @template return-meld
 #'
@@ -60,49 +67,81 @@ addin_project <- function() {
 #'
 #' @examples
 #' \dontrun{
-#' # compare active file, select second file from the same directory
-#' compare_with()
-#' # compare active file, select second file from the working directory
-#' compare_with(path = getwd())
-#' # compare active file, select second file from the home directory
-#' compare_with(path = "~")
-#' # compare a given file, select second file from the working directory
-#' compare_with(file = "~/file1.ext", path = getwd())
+#' # compare active file, select other file from the same directory
+#' compare_active_file_with_other()
+#' # compare active file, select other file from the working directory
+#' compare_active_file_with_other(location = getwd())
+#' # compare active file, select other file from the home directory
+#' compare_active_file_with_other(location = "~")
+#' # compare a given file, select other file from the working directory
+#' compare_with_other("~/file1.ext", location = getwd())
 #' # compare a given file under version control with the repository version
-#' compare_with(file = "~/file1.ext", path = NA)
-#' # custom caller information upon error, e.g. from a wrapper function
-#' compare_home_dir <- function(file) {
-#'   compare_with(file, path = "~", caller = "compare_home_dir")
-#' }
-#' my_wrapper("non/existing/file") # customized error message
+#' compare_with_repo("~/file1.ext")
 #' }
 #'
+#' @name compare_with
+NULL
+
+#' @eval man_describeIn_compare_with("path", "other")
+#'
 #' @export
-compare_with <- function(file = NULL, path = NULL, caller = NULL) {
+compare_with_other <- function(path = NULL, location = NULL) {
 
-  if (is.null(caller)) {
-    # error messages customized for function "compare_with"
-    caller <- "compare_with"
+  # make sure `path` exists
+  check_path(path)
+  # is `path` a directory?
+  is_dir <- dir.exists(path)
+  # default `location`: same parent directory as `path`
+  if (is.null(location)) {
+    location <- dirname(path)
+  } else {
+    # make sure `location` exists
+    check_path(location, what = "location")
   }
-  if (is.null(file)) {
-    file <- get_active_file(caller)
-  }
-  if (!file.exists(file)) {
-    stop(info_msg(caller, "requires the path to an existing file"))
-  }
-  with <- if (!is.na(path)) { # NULL otherwise
-    if (is.null(path)) {
-      path <- dirname(file)
-    }
-    if (!dir.exists(path)) {
-      stop(info_msg(caller, "requires an existing path for selecting the second file"))
-    }
-    select_file(path = path, caller)
-  }
+  # select using the appropriate selection dialog
+  other <- select_other(location, is_dir)
 
-  compare_meld(file, with)
+  # compare
+  compare_meld(path, other)
 }
 
+#' @eval man_describeIn_compare_with("path", "repo")
+#'
+#' @export
+compare_with_repo <- function(path) {
+  # make sure `path` exists
+  check_path(path)
+  compare_meld(path)
+}
+
+# Checks that `path` exists with custom error message
+check_path <- function(path, what = "path") {
+  if (!file.exists(path)) {
+    stop("The provided ", what, " ", sQuote(path), " does not exist.")
+  }
+  invisible(path)
+}
+
+#' @eval man_describeIn_compare_with("active_file", "other")
+#'
+#' @export
+compare_active_file_with_other <- function(location = NULL) {
+  compare_with_other(get_active_file(), location)
+}
+
+#' @eval man_describeIn_compare_with("active_file", "repo")
+#'
+#' @export
+compare_active_file_with_repo <- function() {
+  compare_with_repo(get_active_file())
+}
+
+#' @eval man_describeIn_compare_with("active_project", "repo")
+#'
+#' @export
+compare_project_with_repo <- function() {
+  compare_with_repo(get_active_project())
+}
 
 # Calls Meld, consider exposing this with full `meld` capability covering 3-way
 # comparison, see `meld --help`
@@ -118,22 +157,37 @@ shPath <- function(path) {
   }
 }
 
-# Returns active file path, trigger an error message if null
-get_active_file <- function(caller) {
+# Returns path of active file, triggers an error message if null
+get_active_file <- function() {
   file <- rstudioapi::getSourceEditorContext()$path
-  stop_if_null(file, info_msg(caller, "requires an active file (open and selected in the editor)."))
+  stop_if_null(file, "An active file (open and selected in the editor) is required.")
 }
 
-# Returns comparison file path, trigger an error message if null
-select_file <- function(path, caller, ...) {
-  file <- rstudioapi::selectFile(path = path, ...)
-  stop_if_null(file, info_msg(caller, "requires a second file to compare."))
+# Returns path of active project, triggers an error message if null
+get_active_project <- function() {
+  project_dir <- rstudioapi::getActiveProject()
+  stop_if_null(project_dir, "An active RStudio project is required.")
 }
 
-# Constructs error message
-info_msg <- function(what, msg) {
-  sprintf("'%s' %s", what, msg)
+# Constructs the title for the select dialog window
+dialog_caption <- function(is.dir = FALSE) {
+  what <- if (is.dir) "directory" else "file"
+  sprintf("Select a %s to compare against", what)
 }
+
+# Returns comparison file/directory path, triggers an error message if null
+select_other <- function(location, is.dir = FALSE) {
+  # use the appropriate selection dialog
+  selectOther <- if (is.dir) {
+    rstudioapi::selectDirectory
+  } else {
+    rstudioapi::selectFile
+  }
+  caption <- dialog_caption(is.dir)
+  other <- selectOther(path = location, caption = caption)
+  stop_if_null(other, paste0("You must ", tolower(caption), "."))
+}
+
 
 # Checks if input is null and stop with a message
 stop_if_null <- function(x, msg) {

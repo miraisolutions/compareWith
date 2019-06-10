@@ -2,46 +2,62 @@
 % Please edit documentation in R/compare.R
 \name{compare_with}
 \alias{compare_with}
-\title{File comparison}
+\alias{compare_with_other}
+\alias{compare_with_repo}
+\alias{compare_active_file_with_other}
+\alias{compare_active_file_with_repo}
+\alias{compare_project_with_repo}
+\title{File and directory comparison}
 \usage{
-compare_with(file = NULL, path = NULL, caller = NULL)
+compare_with_other(path = NULL, location = NULL)
+
+compare_with_repo(path)
+
+compare_active_file_with_other(location = NULL)
+
+compare_active_file_with_repo()
+
+compare_project_with_repo()
 }
 \arguments{
-\item{file}{Optional path to an existing file to be compared. If \code{NULL} (the
-default), the active RStudio file is used.}
+\item{path}{Path to an existing file or directory to be compared.}
 
-\item{path}{Path of the initial directory for selecting the second file to
-compare against via \code{\link[=selectFile]{selectFile()}}. If \code{NULL} (the default), the directory
-of the first \code{file} is used. Use \code{NA} to compare a \code{file} under version
-control for with the repository version.}
-
-\item{caller}{String information about the caller, to customize error
-messages.}
+\item{location}{Path of the initial directory for selecting the other file to
+compare against via \code{\link[=selectFile]{selectFile()}}. If \code{NULL} (the default), the parent
+directory of the input  \code{path} is used.}
 }
 \value{
 Invisibly returns the result of calling \code{meld} via \code{\link[=system2]{system2()}}.
 }
 \description{
-Compare (active) \code{file} to a another selected by the user or to the version
+Compare file or directory to another selected by the user or to the version
 control repository.
 }
+\section{Functions}{
+\itemize{
+\item \code{compare_with_other}: Compares a file or directory against another selected by the user.
+
+\item \code{compare_with_repo}: Compares a file or directory against the version control repository.
+
+\item \code{compare_active_file_with_other}: Compares the active file against another selected by the user.
+
+\item \code{compare_active_file_with_repo}: Compares the active file against the version control repository.
+
+\item \code{compare_project_with_repo}: Compares the active file against the version control repository.
+}}
+
 \examples{
 \dontrun{
-# compare active file, select second file from the same directory
-compare_with()
-# compare active file, select second file from the working directory
-compare_with(path = getwd())
-# compare active file, select second file from the home directory
-compare_with(path = "~")
-# compare a given file, select second file from the working directory
-compare_with(file = "~/file1.ext", path = getwd())
+# compare active file, select other file from the same directory
+compare_active_file_with_other()
+# compare active file, select other file from the working directory
+compare_active_file_with_other(location = getwd())
+# compare active file, select other file from the home directory
+compare_active_file_with_other(location = "~")
+# compare a given file, select other file from the working directory
+compare_with_other("~/file1.ext", location = getwd())
 # compare a given file under version control with the repository version
-compare_with(file = "~/file1.ext", path = NA)
-# custom caller information upon error, e.g. from a wrapper function
-compare_home_dir <- function(file) {
-  compare_with(file, path = "~", caller = "compare_home_dir")
-}
-my_wrapper("non/existing/file") # customized error message
+compare_with_repo("~/file1.ext")
 }
 
 }

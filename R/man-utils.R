@@ -9,3 +9,26 @@ man_section_addins <- function() {
     "}"
   )
 }
+
+
+# Construct a description for any of the compare_with function
+describe_compare_with <- function(what, with) {
+  what <- switch(
+    what,
+    path = "a file or directory",
+    active_file = "the active file",
+    active_project = "the active file"
+  )
+  with <- switch(
+    with,
+    other = "another selected by the user",
+    repo = "the version control repository"
+  )
+  paste("Compares", what, "against", with)
+}
+
+
+# Create a @describeIn tag for any compare_with function
+man_describeIn_compare_with <- function(what, with) {
+  sprintf("@describeIn compare_with %s.", describe_compare_with(what, with))
+}

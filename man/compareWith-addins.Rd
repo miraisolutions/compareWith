@@ -17,5 +17,6 @@ active files or projects against local or version control repository items.
 }
 
 \seealso{
-Function \code{\link[=compare_with]{compare_with()}} for the flexible comparison of files.
+Functions \code{\link[=compare_with_other]{compare_with_other()}} and \code{\link[=compare_with_repo]{compare_with_repo()}} for the
+flexible comparison of files and directories.
 }
