@@ -25,13 +25,15 @@ test_that("Error when Meld installation not detected", {
 test_that("Error with non-working Meld installation", {
   # mimick behavior by calling `meld` with an invalid option
   expect_error(
-    check_meld_version(option = "--ver_sion"),
+    suppressWarnings(
+      check_meld_version(option = "--ver_sion")
+    ),
     "Meld installation not working.*instructions.*README"
   )
 })
 
-test_that("A message is produced with the output of non-working Meld", {
-  expect_message(
+test_that("A warning is produced with the output of non-working Meld", {
+  expect_warning(
     # prevent error to test the message ooly
     tryCatch(check_meld_version(option = "--ver_sion"), error = invisible),
     "error.*option", ignore.case = TRUE

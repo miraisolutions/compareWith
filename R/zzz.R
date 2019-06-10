@@ -27,7 +27,7 @@ check_meld_version <- function(meld = "meld", option = "--version") {
     }
   )
   if (isTRUE(attr(out, "status") != 0)) {
-    message(paste(out, collapse = "\n"))
+    warning(paste(out, collapse = "\n"), immediate. = TRUE, call. = FALSE)
     stop(
       "Existing Meld installation not working correctly.\n",
       "Make sure you have a fully functional `meld` installed in your system.\n",
