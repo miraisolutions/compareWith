@@ -11,7 +11,9 @@
 #' @name compareWith-addins
 NULL
 
-# Addin bindings (not exported), with addin-specific errors
+# Addin bindings (not exported), with addin-specific errors. An attribute with
+# the addin name is also added, and used for unit-testing the consistency with
+# addins.dcf.
 addin_factory <- function(addin, body) {
   binding <- function() {
     with_addin_errors(addin = addin, body)
