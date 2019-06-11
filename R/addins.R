@@ -12,27 +12,25 @@
 NULL
 
 # Addin bindings (not exported), with addin-specific errors
-
-addin_other <- function() {
-  with_addin_errors(
-    addin = "Compare with other...",
-    compare_active_file_with_other()
-  )
+addin_factory <- function(addin, body) {
+  binding <- function() {
+    with_addin_errors(addin = addin, body)
+  }
+  attr(binding, "addin") <- addin
+  binding
 }
-
-addin_repo <- function() {
-  with_addin_errors(
-    addin = "Compare with repo",
-    compare_active_file_with_repo()
-  )
-}
-
-addin_project <- function() {
-  with_addin_errors(
-    addin = "Compare with repo - project",
-    compare_project_with_repo()
-  )
-}
+addin_other <- addin_factory(
+  addin = "Compare with other...",
+  compare_active_file_with_other()
+)
+addin_repo <- addin_factory(
+  addin = "Compare with repo",
+  compare_active_file_with_repo()
+)
+addin_project <- addin_factory(
+  addin = "Compare with repo - project",
+  compare_project_with_repo()
+)
 
 # Handle addin-specific error messages
 addin_message <- function(addin, condition) {
@@ -46,4 +44,3 @@ with_addin_errors <- function(expr, addin) {
     }
   )
 }
-# with_addin_errors(stop("Not good"), "My Addin")
