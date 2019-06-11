@@ -22,9 +22,9 @@ compare_project_with_repo()
 \arguments{
 \item{path}{Path to an existing file or directory to be compared.}
 
-\item{location}{Path of the initial directory for selecting the other file to
-compare against via \code{\link[=selectFile]{selectFile()}}. If \code{NULL} (the default), the parent
-directory of the input  \code{path} is used.}
+\item{location}{Initial path for selecting the other file or directory (via
+\code{\link[=selectFile]{selectFile()}} or \code{\link[=selectDirectory]{selectDirectory()}})to compare against. If \code{NULL} (the
+default), the parent directory of the input \code{path} is used.}
 }
 \value{
 Invisibly returns the result of calling \code{meld} via \code{\link[=system2]{system2()}}.
@@ -48,18 +48,31 @@ control repository.
 
 \examples{
 \dontrun{
+# compare a given file, select other file from the same directory
+compare_with_other("~/bar/foo.file")
+# compare a given file, select other file from the working directory
+compare_with_other("~/bar/foo.file", location = getwd())
+# compare a given file, select other file from home directory
+compare_with_other("~/bar/foo.file", location = "~")
+# compare a given directory, select other directory from the parent directory
+compare_with_other("~/foo/bar/")
+# compare a given directory, select other directory from a different location
+compare_with_other("~/foo/bar/", location = "/home/me/dir")
 # compare active file, select other file from the same directory
 compare_active_file_with_other()
 # compare active file, select other file from the working directory
 compare_active_file_with_other(location = getwd())
 # compare active file, select other file from the home directory
 compare_active_file_with_other(location = "~")
-# compare a given file, select other file from the working directory
-compare_with_other("~/file1.ext", location = getwd())
 # compare a given file under version control with the repository version
-compare_with_repo("~/file1.ext")
+compare_with_repo("~/bar/foo.file")
+# compare a given directory under version control with the repository version
+compare_with_repo("~/foo/bar")
+# compare active file under version control with the repository version
+compare_active_file_with_repo()
+# compare current project with the version control repository
+compare_project_with_repo()
 }
-
 }
 \seealso{
 \link[=compareWith-addins]{RStudio addins} for file and project comparison
