@@ -55,15 +55,6 @@ compare_with_repo <- function(path) {
 }
 
 
-# Checks that `path` exists with custom error message
-check_path <- function(path, what = "path") {
-  if (!file.exists(path)) {
-    stop("The provided ", what, " ", sQuote(path), " does not exist.")
-  }
-  invisible(path)
-}
-
-
 #' @eval man_describeIn_compare_with("active_file", "other")
 #'
 #' @export
@@ -88,19 +79,12 @@ compare_project_with_repo <- function() {
 }
 
 
-# Calls Meld, consider exposing this with full `meld` capability covering 3-way
-# comparison, see `meld --help`
-compare_meld <- function(file_1, file_2 = NULL) {
-  ret <- system2("meld", args = c(shPath(file_1), shPath(file_2)), wait = FALSE)
-  invisible(ret)
-}
-
-
-# Creates quoted path in canonical form for OS shell usage
-shPath <- function(path) {
-  if (!is.null(path)) {
-    shQuote(normalizePath(path, mustWork = TRUE))
+# Checks that `path` exists with custom error message
+check_path <- function(path, what = "path") {
+  if (!file.exists(path)) {
+    stop("The provided ", what, " ", sQuote(path), " does not exist.")
   }
+  invisible(path)
 }
 
 
@@ -145,4 +129,20 @@ stop_if_null <- function(x, msg) {
     stop(msg, call. = FALSE)
   }
   invisible(x)
+}
+
+
+# Calls Meld, consider exposing this with full `meld` capability covering 3-way
+# comparison, see `meld --help`
+compare_meld <- function(file_1, file_2 = NULL) {
+  ret <- system2("meld", args = c(shPath(file_1), shPath(file_2)), wait = FALSE)
+  invisible(ret)
+}
+
+
+# Creates quoted path in canonical form for OS shell usage
+shPath <- function(path) {
+  if (!is.null(path)) {
+    shQuote(normalizePath(path, mustWork = TRUE))
+  }
 }
