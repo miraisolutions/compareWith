@@ -2,7 +2,7 @@
 .onLoad <- function(libname, pkgname) {
   # In principle we should not be messaging anything .onLoad(), not even via
   # packageStartupMessage (NOTE in R CMD CHECK)
-  packageStartupMessage("Check Meld installation:")
+  packageStartupMessage("Checking Meld installation:")
   packageStartupMessage(check_meld_version())
 }
 
