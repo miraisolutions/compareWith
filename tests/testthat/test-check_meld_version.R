@@ -1,7 +1,7 @@
 context("check_meld_version")
 
-test_that("The Meld version is returned", {
-  # at the same time, test no error when checking version
+test_that("The version of Meld is returned", {
+  # at the same time, test there is no error when checking version
   meld_ver <- expect_error(check_meld_version(), NA)
   # and possibly skip the other tests
   skip_if(inherits(meld_ver, "error"), "Error checking the Meld version")
@@ -34,7 +34,7 @@ test_that("Error with non-working Meld installation", {
 
 test_that("A warning is produced with the output of non-working Meld", {
   expect_warning(
-    # prevent error to test the message ooly
+    # prevent error to test the message only
     tryCatch(check_meld_version(option = "--ver_sion"), error = invisible),
     "error.*option", ignore.case = TRUE
   )
