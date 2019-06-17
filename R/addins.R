@@ -23,15 +23,15 @@ addin_factory <- function(addin, body) {
 }
 addin_other <- addin_factory(
   addin = "Compare with other...",
-  compare_active_file_with_other()
+  expression(compare_active_file_with_other())
 )
 addin_repo <- addin_factory(
   addin = "Compare with repo",
-  compare_active_file_with_repo()
+  expression(compare_active_file_with_repo())
 )
 addin_project <- addin_factory(
   addin = "Compare with repo - project",
-  compare_project_with_repo()
+  expression(compare_project_with_repo())
 )
 
 # Handle addin-specific error messages
@@ -40,7 +40,7 @@ addin_message <- function(addin, condition) {
 }
 with_addin_errors <- function(expr, addin) {
   withCallingHandlers(
-    expr,
+    eval(expr),
     error = function(e) {
       stop(addin_message(addin, e), call. = FALSE)
     }

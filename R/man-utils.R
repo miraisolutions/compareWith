@@ -11,7 +11,7 @@ man_section_addins <- function() {
 }
 
 
-# Construct a description for any of the compare_with function
+# Construct a description for any of the compare_with functions
 describe_compare_with <- function(what, with) {
   what <- switch(
     what,
