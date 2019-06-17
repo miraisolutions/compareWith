@@ -2,41 +2,79 @@
 % Please edit documentation in R/compare.R
 \name{compare_with}
 \alias{compare_with}
-\alias{compare_with_neighbor}
+\alias{compare_with_other}
 \alias{compare_with_repo}
+\alias{compare_active_file_with_other}
+\alias{compare_active_file_with_repo}
 \alias{compare_project_with_repo}
-\title{Version-control comparison of files}
+\title{File and directory comparison}
 \usage{
-compare_with()
+compare_with_other(path = NULL, location = NULL)
 
-compare_with_neighbor()
+compare_with_repo(path)
 
-compare_with_repo()
+compare_active_file_with_other(location = NULL)
+
+compare_active_file_with_repo()
 
 compare_project_with_repo()
 }
+\arguments{
+\item{path}{Path to an existing file or directory to be compared.}
+
+\item{location}{Initial path for selecting the other file or directory (via
+\code{\link[=selectFile]{selectFile()}} or \code{\link[=selectDirectory]{selectDirectory()}})to compare against. If \code{NULL} (the
+default), the parent directory of the input \code{path} is used.}
+}
 \value{
-Invisibly returns the result of calling the \code{meld} command via
-\code{\link[=system2]{system2()}}.
+Invisibly returns the result of calling \code{meld} via \code{\link[=system2]{system2()}}.
 }
 \description{
-Compare active files or projects against local or version control repository
-items. Functions are called by the \pkg{compareWith} addins.
+Compare file or directory to another selected by the user or to the version
+control repository.
 }
 \section{Functions}{
 \itemize{
-\item \code{compare_with}: compares active file with another (search working directory). Serves as binding for addin 'Compare with...'.
+\item \code{compare_with_other}: Compares a file or directory against another selected by the user.
 
-\item \code{compare_with_neighbor}: compares active file with another (search same directory). Serves as binding for addin 'Compare with neighbor...'.
+\item \code{compare_with_repo}: Compares a file or directory against the version control repository.
 
-\item \code{compare_with_repo}: compares active file with the version control repository. Serves as binding for addin 'Compare with repo'.
+\item \code{compare_active_file_with_other}: Compares the active file against another selected by the user.
 
-\item \code{compare_project_with_repo}: compares active RStudio project with the version control repository. Serves as binding for addin 'Compare with repo (project)'.
+\item \code{compare_active_file_with_repo}: Compares the active file against the version control repository.
+
+\item \code{compare_project_with_repo}: Compares the active file against the version control repository.
 }}
 
 \examples{
-\dontrun{compare_with()}
-\dontrun{compare_with_neighbor()}
-\dontrun{compare_with_repo()}
-\dontrun{compare_project_with_repo()}
+\dontrun{
+# compare a given file, select other file from the same directory
+compare_with_other("~/bar/foo.file")
+# compare a given file, select other file from the working directory
+compare_with_other("~/bar/foo.file", location = getwd())
+# compare a given file, select other file from home directory
+compare_with_other("~/bar/foo.file", location = "~")
+# compare a given directory, select other directory from the parent directory
+compare_with_other("~/foo/bar/")
+# compare a given directory, select other directory from a different location
+compare_with_other("~/foo/bar/", location = "/home/me/dir")
+# compare active file, select other file from the same directory
+compare_active_file_with_other()
+# compare active file, select other file from the working directory
+compare_active_file_with_other(location = getwd())
+# compare active file, select other file from the home directory
+compare_active_file_with_other(location = "~")
+# compare a given file under version control with the repository version
+compare_with_repo("~/bar/foo.file")
+# compare a given directory under version control with the repository version
+compare_with_repo("~/foo/bar")
+# compare active file under version control with the repository version
+compare_active_file_with_repo()
+# compare current project with the version control repository
+compare_project_with_repo()
+}
+}
+\seealso{
+\link[=compareWith-addins]{RStudio addins} for file and project comparison
+with support for version control.
 }

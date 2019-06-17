@@ -1,19 +1,14 @@
 Name: Compare with repo
 Description: Compare active file with version control repository
-Binding: compare_with_repo
+Binding: addin_repo
 Interactive: true
 
-Name: Compare with repo (project)
+Name: Compare with repo - project
 Description: Compare active project with version control repository
-Binding: compare_project_with_repo
+Binding: addin_project
 Interactive: true
 
-Name: Compare with...
-Description: Compare active file with other file (search working dir)
-Binding: compare_with
-Interactive: true
-
-Name: Compare with neighbor...
-Description: Compare active file with other file (search same dir)
-Binding: compare_with_neighbor
+Name: Compare with other...
+Description: Compare active file with another
+Binding: addin_other
 Interactive: true
