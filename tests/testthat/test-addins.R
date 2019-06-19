@@ -30,6 +30,17 @@ test_that("Addins factory returns a function with customized errors", {
   )
 })
 
+test_that("Addins factory wraps around the expression and not its value", {
+  addin_fun <- addin_factory("My Addin", {
+    message("side-effect in every call")
+    invisible(0)
+  })
+  # if the expression value is (lazily) wrapped around, further calls would not
+  # re-trigger a message
+  expect_message(addin_fun(), "side-effect")
+  expect_message(addin_fun(), "side-effect")
+})
+
 # RStudio addins ----
 context("RStudio addins")
 
