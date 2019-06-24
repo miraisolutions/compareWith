@@ -13,7 +13,7 @@ check_readme_msg <- c(
 
 # Check (and return) Meld version, stop if Meld is not installed or there are
 # issues determining its version. Extra arguments allow mimicking error
-# situations for testing
+# situations for testing.
 check_meld_version <- function(meld = "meld", option = "--version") {
   out <- withCallingHandlers(
     sys::exec_internal(meld, option, error = FALSE),
