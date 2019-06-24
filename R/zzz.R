@@ -28,7 +28,7 @@ check_meld_version <- function(meld = "meld", option = "--version") {
   )
   if (isTRUE(out$status != 0)) {
     warning(
-      paste(sys::as_text(out$stdout), collapse = "\n"),
+      paste(sys::as_text(c(out$stdout, out$stderr)), collapse = "\n"),
       immediate. = TRUE, call. = FALSE
     )
     stop(
