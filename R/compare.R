@@ -136,16 +136,8 @@ stop_if_null <- function(x, msg) {
 # comparison, see `meld --help`
 compare_meld <- function(file_1, file_2 = NULL) {
   ret <- sys::exec_background(
-    "meld", args = I(c(shPath(file_1), shPath(file_2))),
+    "meld", args = normalizePath(c(file_1, file_2)),
     std_out = TRUE, std_err = TRUE
   )
   invisible(ret)
-}
-
-
-# Creates quoted path in canonical form for OS shell usage
-shPath <- function(path) {
-  if (!is.null(path)) {
-    shQuote(normalizePath(path, mustWork = TRUE))
-  }
 }
