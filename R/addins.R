@@ -15,23 +15,25 @@ NULL
 # the addin name is also added, and used for unit-testing the consistency with
 # addins.dcf.
 addin_factory <- function(addin, body) {
+  # get the body as expression from the call
+  body <- match.call()$body
   binding <- function() {
-    with_addin_errors(addin = addin, body)
+    with_addin_errors(eval(body), addin)
   }
   attr(binding, "addin") <- addin
   binding
 }
 addin_other <- addin_factory(
   addin = "Compare with other...",
-  expression(compare_active_file_with_other())
+  compare_active_file_with_other()
 )
 addin_repo <- addin_factory(
   addin = "Compare with repo",
-  expression(compare_active_file_with_repo())
+  compare_active_file_with_repo()
 )
 addin_project <- addin_factory(
   addin = "Compare with repo - project",
-  expression(compare_project_with_repo())
+  compare_project_with_repo()
 )
 
 # Handle addin-specific error messages
@@ -40,7 +42,7 @@ addin_message <- function(addin, condition) {
 }
 with_addin_errors <- function(expr, addin) {
   withCallingHandlers(
-    eval(expr),
+    expr,
     error = function(e) {
       stop(addin_message(addin, e), call. = FALSE)
     }
