@@ -17,28 +17,9 @@ NULL
 addin_factory <- function(addin, body) {
   # get the body as expression from the call
   body <- match.call()$body
-  # alternative implementations
-  # 1. evaluate the expression inside the binding function (lexical scoping)
-  binding.1 <- function() {
+  binding <- function() {
     with_addin_errors(eval(body), addin)
   }
-  # 2. use substitute to get the body of the addin binding same as if manually
-  # created, and use it to construct the binding function
-  # > 2.1. by using function as a function
-  # > > 2.1.1
-  binding.2.1.1 <- eval(call("function", NULL, substitute(
-    with_addin_errors(body, addin))
-  ))
-  # > > 2.1.2
-  binding.2.1.2 <- do.call("function", list(NULL, substitute(
-    with_addin_errors(body, addin))
-  ))
-  # > 2.2. by re-assigning the body
-  binding.2.2 <- function() {}
-  body(binding.2.2) <- substitute(
-    with_addin_errors(body, addin)
-  )
-  binding <- binding.2.1.1
   attr(binding, "addin") <- addin
   binding
 }
