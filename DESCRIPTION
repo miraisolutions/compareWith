@@ -20,7 +20,8 @@ URL: https://mirai-solutions.ch,
 BugReports: https://github.com/miraisolutions/compareWith/issues
 SystemRequirements: meld
 Imports:
-    rstudioapi
+    rstudioapi,
+    sys
 Suggests: 
     testthat (>= 2.1.0)
 Encoding: UTF-8

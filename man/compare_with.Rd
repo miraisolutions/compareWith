@@ -27,7 +27,8 @@ compare_project_with_repo()
 default), the parent directory of the input \code{path} is used.}
 }
 \value{
-Invisibly returns the result of calling \code{meld} via \code{\link[=system2]{system2()}}.
+Invisibly returns the result of calling \code{meld} via
+\code{\link[sys:exec_background]{sys::exec_background()}}.
 }
 \description{
 Compare file or directory to another selected by the user or to the version

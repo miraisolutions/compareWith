@@ -1,1 +1,2 @@
-#' @return Invisibly returns the result of calling `meld` via [system2()].
+#' @return Invisibly returns the result of calling `meld` via
+#'   [sys::exec_background()].

@@ -13,10 +13,10 @@ check_readme_msg <- c(
 
 # Check (and return) Meld version, stop if Meld is not installed or there are
 # issues determining its version. Extra arguments allow mimicking error
-# situations for testing
+# situations for testing.
 check_meld_version <- function(meld = "meld", option = "--version") {
   out <- withCallingHandlers(
-    suppressWarnings(system2(meld, option, stdout = TRUE, stderr = TRUE)),
+    sys::exec_internal(meld, option, error = FALSE),
     error = function(e) {
       stop(
         "Unable to detect a Meld installation.\n",
@@ -26,8 +26,11 @@ check_meld_version <- function(meld = "meld", option = "--version") {
       )
     }
   )
-  if (isTRUE(attr(out, "status") != 0)) {
-    warning(paste(out, collapse = "\n"), immediate. = TRUE, call. = FALSE)
+  if (isTRUE(out$status != 0)) {
+    warning(
+      paste(sys::as_text(c(out$stdout, out$stderr)), collapse = "\n"),
+      immediate. = TRUE, call. = FALSE
+    )
     stop(
       "Existing Meld installation not working correctly.\n",
       "Make sure you have a fully functional `meld` installed in your system.\n",
@@ -35,8 +38,5 @@ check_meld_version <- function(meld = "meld", option = "--version") {
       call. = FALSE
     )
   }
-  # return the successful result of meld --version; NOTE that, since we have
-  # stderr = TRUE, possible warnings/error messages are also captured in `out`
-  # (e.g. on Travis CI), therefore only pick the last element as the version
-  utils::tail(out, 1L)
+  sys::as_text(out$stdout)
 }
