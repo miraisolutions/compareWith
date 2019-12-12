@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<img src="man/figures/compareWith.svg" align="right" width="15%" height="15%"/>
+
 # compareWith: RStudio Addins for Enhanced Diff and Merge
 
 <!-- badges: start -->
