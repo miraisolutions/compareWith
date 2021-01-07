@@ -13,6 +13,8 @@ active files or projects against local or version control repository items.
 \item{\strong{Compare with repo}}{Compare active file with version control repository.}
 \item{\strong{Compare with repo - project}}{Compare active project with version control repository.}
 \item{\strong{Compare with other...}}{Compare active file with another.}
+\item{\strong{Compare commits or branches...}}{Compare couples of commits or branches.}
+\item{\strong{Compare current with commit or branch...}}{Compare current git status with a commit or a branch.}
 }
 }
 
