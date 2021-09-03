@@ -16,13 +16,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test:
-    runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
-    steps:
-      - uses: actions/checkout@v1
-      - run: npm install
-      - run: sudo apt-get install xvfb
-      - run: xvfb-run --auto-servernum npm test
   # This workflow contains a single job called "build"
   build:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
@@ -56,8 +49,25 @@ jobs:
       - name: Install tinytex
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
+      - run: sudo apt-get install xvfb
+      - name: npm install, build, and test
+        run: |
+          npm i
+          xvfb-run --auto-servernum npm test
+      - name: cleanup xvfb
+        run: |
+          xvfb_pids=`ps aux | grep tmp/xvfb-run | grep -v grep | awk '{print $2}'`
+          if [ "$xvfb_pids" != "" ]; then
+            echo "Killing the following xvfb processes: $xvfb_pids"
+            sudo kill $xvfb_pids
+          else
+            echo "No xvfb processes to kill"
+          fi
+        env:
+          CI: true
 
-      # - name: Run headless test
+      #
+      # name: Run headless test
       #   uses: actions/xvfb-action@v1
       #   with:
       #     run: npm test
