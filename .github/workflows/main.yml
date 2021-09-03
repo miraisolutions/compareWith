@@ -51,7 +51,7 @@ jobs:
         uses: r-lib/actions/setup-tinytex@v1
 
       - name: Run headless test
-        uses: nfarabullini/xvfb-action@v1
+        uses: actions/xvfb-action@v1
         with:
           run: npm test
 
