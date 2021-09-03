@@ -16,6 +16,13 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  test:
+    runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
+    steps:
+      - uses: actions/checkout@v1
+      - run: npm install
+      - run: sudo apt-get install xvfb
+      - run: xvfb-run --auto-servernum npm test
   # This workflow contains a single job called "build"
   build:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
@@ -50,12 +57,20 @@ jobs:
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
 
-      - name: Run headless test
-        uses: actions/xvfb-action@v1
-        with:
-          run: npm test
-          working-directory: ./ #optional
-
+      # - name: Run headless test
+      #   uses: actions/xvfb-action@v1
+      #   with:
+      #     run: npm test
+      #     working-directory: ./
+      # - name: Install Meld
+      #   if: runner.os == 'Linux'
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y meld
+      #     while read -r cmd
+      #     do
+      #       eval sudo $cmd
+      #     done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
