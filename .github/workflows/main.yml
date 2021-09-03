@@ -18,17 +18,16 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    runs-on: ubuntu-latest
-    # runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
+    runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
     name: >-
       ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
       R ${{ matrix.config.r-version}}
     strategy:
       matrix:
         config:
-          # - os-name: ubuntu
-          #   os-version: latest
-          #   r-version: oldrel
+          - os-name: ubuntu
+            os-version: latest
+            r-version: oldrel
           - os-name: ubuntu
             os-version: "20.04"
             r-version: release
@@ -39,6 +38,8 @@ jobs:
             os-version: "20.04"
             r-version: 3.6
     # Steps represent a sequence of tasks that will be executed as part of the job
+    env:
+      DISPLAY: :0
     steps:
       - uses: actions/checkout@v2
 
@@ -50,22 +51,12 @@ jobs:
       - name: Install tinytex
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
-      - run: sudo apt-get install xvfb
-      - name: npm install, build, and test
+      - name: Setup xvfb (Linux)
+        if: runner.os == 'Linux'
         run: |
-          npm i
-          xvfb-run --auto-servernum npm test
-      - name: cleanup xvfb
-        run: |
-          xvfb_pids=`ps aux | grep tmp/xvfb-run | grep -v grep | awk '{print $2}'`
-          if [ "$xvfb_pids" != "" ]; then
-            echo "Killing the following xvfb processes: $xvfb_pids"
-            sudo kill $xvfb_pids
-          else
-            echo "No xvfb processes to kill"
-          fi
-        env:
-          CI: true
+          sudo apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
+          # start xvfb in the background
+          sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
 
       #
       # name: Run headless test
