@@ -54,6 +54,7 @@ jobs:
         uses: actions/xvfb-action@v1
         with:
           run: npm test
+          working-directory: ./ #optional
 
       - name: Install Meld
         if: runner.os == 'Linux'
