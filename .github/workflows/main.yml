@@ -50,10 +50,13 @@ jobs:
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
 
+      - name: Run headless test
+        uses: nfarabullini/xvfb-action@v1
+        with:
+          run: npm test
+
       - name: Install Meld
         if: runner.os == 'Linux'
-        services:
-          - xvfb
         run: |
           sudo apt-get update
           sudo apt-get install -y meld
