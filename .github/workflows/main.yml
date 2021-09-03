@@ -32,9 +32,9 @@ jobs:
     strategy:
       matrix:
         config:
-          - os-name: ubuntu
-            os-version: latest
-            r-version: oldrel
+          # - os-name: ubuntu
+          #   os-version: latest
+          #   r-version: oldrel
           - os-name: ubuntu
             os-version: "20.04"
             r-version: release
