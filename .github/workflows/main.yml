@@ -21,26 +21,22 @@ jobs:
     runs-on: ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
     name: >-
       ${{ matrix.config.os-name }}-${{ matrix.config.os-version }}
-      R ${{ matrix.config.r-version}} - java ${{ matrix.config.java}}
+      R ${{ matrix.config.r-version}}
     strategy:
       matrix:
         config:
           - os-name: ubuntu
             os-version: latest
             r-version: oldrel
-            vignettes: true
           - os-name: ubuntu
             os-version: "20.04"
             r-version: release
-            vignettes: true
           - os-name: ubuntu
             os-version: "20.04"
             r-version: devel
-            vignettes: true
           - os-name: ubuntu
             os-version: "20.04"
             r-version: 3.6
-            vignettes: false
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
@@ -54,7 +50,7 @@ jobs:
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
 
-      - name: Install system dependencies
+      - name: Install Meld
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install -y meld
@@ -62,4 +58,13 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
+
+      - name: Install dependencies
+        run: |
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_deps(dependencies = TRUE)
+        shell: Rscript {0}
+      - name: Check
+        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
+        shell: Rscript {0}
 
