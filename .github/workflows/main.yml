@@ -53,8 +53,7 @@ jobs:
         uses: r-lib/actions/setup-tinytex@v1
       - uses: actions/checkout@v2
       - run: sudo apt-get install xvfb
-      - name: Cleanup xvfb pidx
-        uses: bcomnes/cleanup-xvfb@v1
+      - run: xvfb-run --auto-servernum npm test
 
       #
       # name: Run headless test
