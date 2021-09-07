@@ -69,4 +69,4 @@ jobs:
       - name: Run headless check
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: Rscript -e 'rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")''
+          run: Rscript -e 'rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")'
