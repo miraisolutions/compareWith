@@ -52,17 +52,16 @@ jobs:
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
       - uses: actions/checkout@v2
-      - name: Install xvfb
-        run: sudo apt-get install xvfb
-      # - name: Install Meld
-      #   if: runner.os == 'Linux'
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y meld
-      #     while read -r cmd
-      #     do
-      #       eval sudo $cmd
-      #     done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
+      - name: Install Meld
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+      sudo apt-get install xvfb
+          sudo apt-get install -y meld
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("${{ matrix.config.os-name }}", "${{ matrix.config.os-version }}"))')
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
