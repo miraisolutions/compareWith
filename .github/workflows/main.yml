@@ -52,10 +52,6 @@ jobs:
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
       - run: sudo apt-get install xvfb
       - name: Cleanup xvfb pidx
         uses: bcomnes/cleanup-xvfb@v1
