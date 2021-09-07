@@ -52,15 +52,8 @@ jobs:
         if: matrix.config.vignettes
         uses: r-lib/actions/setup-tinytex@v1
       - uses: actions/checkout@v2
-      - run: sudo apt-get install xvfb
-      - run: xvfb-run --auto-servernum npm test
-
-      #
-      # name: Run headless test
-      #   uses: actions/xvfb-action@v1
-      #   with:
-      #     run: npm test
-      #     working-directory: ./
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
       # - name: Install Meld
       #   if: runner.os == 'Linux'
       #   run: |
