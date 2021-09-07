@@ -66,10 +66,7 @@ jobs:
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
-      - name: Run headless test
+      - name: Run headless check
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: R CMD INSTALL .
-      - name: Check
-        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
-        shell: Rscript {0}
+          run: Rscript -e 'rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")''
