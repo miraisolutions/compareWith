@@ -69,4 +69,4 @@ jobs:
       - name: Run headless check
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: Rscript -e 'sqrt(4)'
+          run: Rscript -e 'nchar("hello")'
