@@ -68,4 +68,4 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         with:
           run: |
-            Rscript -e 'rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")'
+            Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'error')"
