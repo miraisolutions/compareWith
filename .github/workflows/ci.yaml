@@ -55,8 +55,11 @@ jobs:
             Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'error')"
       
       - uses: r-lib/actions/setup-r-dependencies@v1
-        with:
-          extra-packages: rcmdcheck
+        #with:
+        #  extra-packages: rcmdcheck
+        
+      - uses: r-lib/actions/check-r-package@v1
+
 
       - name: Show testthat output
         if: always()
