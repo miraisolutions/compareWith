@@ -37,10 +37,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v1
-        #with:
-        #  extra-packages: rcmdcheck
-
       - name: Install Meld
         if: runner.os == 'Linux'
         run: |
@@ -53,6 +49,10 @@ jobs:
           run: |
             Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'error')"
 
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: rcmdcheck
+          
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
