@@ -47,16 +47,16 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y meld
-
-      - name: Run headless check
-        uses: GabrielBB/xvfb-action@v1
-        #with:
-        #  run: |
-        #    Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'error')"
-      
+          
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
+
+      - name: Run headless check
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: |
+            Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'error')"
 
       - name: Show testthat output
         if: always()
