@@ -36,16 +36,16 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
-
+          
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: rcmdcheck
+          
       - name: Install Meld
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y meld
-          
-      - uses: r-lib/actions/setup-r-dependencies@v1
-        with:
-          extra-packages: rcmdcheck
 
       - name: Run headless check
         uses: GabrielBB/xvfb-action@v1
