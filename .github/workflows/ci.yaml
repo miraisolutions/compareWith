@@ -73,9 +73,3 @@ jobs:
         with:
           run: |
             Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'error')"
-
-      - name: Check package
-        run: |
-          options(crayon.enabled = TRUE) # enable colorful R CMD check output
-          rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
-        shell: Rscript {0}
