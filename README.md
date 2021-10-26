@@ -7,8 +7,7 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.com/miraisolutions/compareWith.svg?branch=master)](https://travis-ci.com/miraisolutions/compareWith)
+[![R-CMD-check](https://github.com/miraisolutions/compareWith/workflows/R-CMD-check/badge.svg)](https://github.com/miraisolutions/compareWith/actions)
 <!-- badges: end -->
 
 **compareWith** is an R package providing user-friendly [RStudio
@@ -19,10 +18,10 @@ version control.
 
 Tasks **compareWith** greatly helps with include:
 
-  - Compare differences prior to commit, for individual files or the
+-   Compare differences prior to commit, for individual files or the
     whole project.
-  - Inspect and resolve merge conflicts via three-way comparison.
-  - Compare two distinct files with each other.
+-   Inspect and resolve merge conflicts via three-way comparison.
+-   Compare two distinct files with each other.
 
 The package relies on [**Meld**](http://meldmerge.org/), a common visual
 diff and merge tool.

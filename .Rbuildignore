@@ -2,4 +2,4 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^man-roxygen$
-^\.travis\.yml$
+^\.github$
