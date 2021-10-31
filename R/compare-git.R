@@ -23,7 +23,7 @@ compare_git_difftool <- function(commit_1 = NULL, commit_2 = NULL) {
   # from git 1.7.11
   # git difftool -t meld -d master..mycommit
   diff_commits <- paste(c(commit_1, commit_2), collapse = "..")
-  git_args <- c("difftool", "-t", "meld", "-d", diff_commits)
+  git_args <- c("difftool", "-t", "meld", "-d", diff_commits, "--")
 
 
   ret <- sys::exec_background(
