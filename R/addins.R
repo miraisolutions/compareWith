@@ -35,6 +35,14 @@ addin_project <- addin_factory(
   addin = "Compare with repo - project",
   compare_project_with_repo()
 )
+addin_branch <- addin_factory(
+  addin = "Compare commits or branches...",
+  compare_commit_interactive(ask_right = TRUE)
+)
+addin_branch_current <- addin_factory(
+  addin = "Compare current with commit or branch...",
+  compare_commit_interactive(ask_right = FALSE)
+)
 
 # Handle addin-specific error messages
 addin_message <- function(addin, condition) {

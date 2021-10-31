@@ -59,13 +59,3 @@ compare_commit_interactive <- function(ask_right = TRUE) {
   compare_commit(left, right)
 }
 
-addin_branch <- addin_factory(
-  addin = "Compare commits or branches...",
-  compare_commit_interactive(ask_right = TRUE)
-)
-
-addin_branch_current <- addin_factory(
-  addin = "Compare current with commit or branch...",
-  compare_commit_interactive(ask_right = FALSE)
-)
-
