@@ -15,6 +15,10 @@
 #' @name compare_commit
 #' @export
 compare_commit <- function(commit_1 = "HEAD", commit_2 = "") {
+  compare_git_difftool(commit_1, commit_2)
+}
+
+compare_git_difftool <- function(commit_1 = "HEAD", commit_2 = "") {
   # from git 1.7.11
   # git difftool -t meld -d master..mycommit
 
