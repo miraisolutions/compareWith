@@ -14,24 +14,22 @@
 #'
 #' @name compare_commit
 #' @export
-compare_commit <- function(commit_1 = "HEAD", commit_2 = "") {
+compare_commit <- function(commit_1 = "HEAD", commit_2 = NULL) {
   compare_git_difftool(commit_1, commit_2)
 }
 
-compare_git_difftool <- function(commit_1 = "HEAD", commit_2 = "") {
+compare_git_difftool <- function(commit_1 = NULL, commit_2 = NULL) {
+
   # from git 1.7.11
   # git difftool -t meld -d master..mycommit
+  diff_commits <- paste(c(commit_1, commit_2), collapse = "..")
+  git_args <- c("difftool", "-t", "meld", "-d", diff_commits)
 
-  if (commit_2 == "") { # compare with current state
-    args <- c("difftool", "-t", "meld", "-d", paste0(commit_1))
-  } else {
-    args <- c("difftool", "-t", "meld", "-d", paste0(commit_1, "..", commit_2))
-  }
 
   ret <- sys::exec_background(
-    "git",
-    args = args,
-    std_out = TRUE, std_err = TRUE)
+    "git", args = git_args,
+    std_out = TRUE, std_err = TRUE
+  )
 
   invisible(ret)
 }
@@ -57,7 +55,7 @@ compare_commit_interactive <- function(ask_right = TRUE) {
                                     message = "destination commit or branch (master, HEAD, <sha1>, ...)",
                                     default = "HEAD")
   } else {
-    right <- ""
+    right <- NULL
   }
   compare_commit(left, right)
 }
