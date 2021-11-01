@@ -136,10 +136,25 @@ compare_git_difftool <- function(commit_1 = NULL, commit_2 = NULL, path = NULL,
 
 # Returns a Git revision, triggers an error message if null
 prompt_git_revision <- function(title, default = "") {
+  explain_revision <- paste(
+    " - ", # list-like
+    c(
+      "HEAD (last commit)",
+      "@{upstream} / @{u} (current upstream remote)",
+      "<branch> (e.g. main, develop)",
+      "<branch>@{u} (upstream remote of <branch>)",
+      "commit <sha>",
+      NULL # for convenience with trailing commas in case of reshuffling
+    ),
+    collapse = "\n"
+  )
+
   git_commit <- rstudioapi::showPrompt(
     title = title,
     message = paste0(
-      title, ": master, HEAD, <sha1>, ..."
+      title, ":\n\n",
+      explain_revision, "\n\n",
+      "See ?compareWith::compare_git\n"
     ),
     default = default
   )
