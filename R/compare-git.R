@@ -52,15 +52,24 @@ compare_branch <- function(branch_1 = "master", branch_2 = "") {
 #' @param ask_right Logical. Whether to ask for a second commit to compare.
 #' FALSE will compare to current state.
 compare_commit_interactive <- function(ask_right = TRUE) {
-  left <- rstudioapi::showPrompt(title = "Left commit or branch",
-                                 message = "source commit or branch (master, HEAD, <sha1>, ...)", default = "master")
+  left <- prompt_git_revision("Left commit or branch", default = "master")
   if (isTRUE(ask_right)) {
-    right <- rstudioapi::showPrompt(title = "Right commit or branch",
-                                    message = "destination commit or branch (master, HEAD, <sha1>, ...)",
-                                    default = "HEAD")
+    right <- prompt_git_revision("Right commit or branch", default = "HEAD")
   } else {
     right <- NULL
   }
   compare_commit(left, right)
 }
 
+
+# Returns a Git revision, triggers an error message if null
+prompt_git_revision <- function(title, default = "") {
+  git_commit <- rstudioapi::showPrompt(
+    title = title,
+    message = paste0(
+      title, ": master, HEAD, <sha1>, ..."
+    ),
+    default = default
+  )
+  stop_if_null(git_commit, paste0("You must specify the ", tolower(title), "."))
+}
