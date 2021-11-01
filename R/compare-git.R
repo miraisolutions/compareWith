@@ -18,19 +18,23 @@ compare_commit <- function(commit_1 = "HEAD", commit_2 = NULL) {
   compare_git_difftool(commit_1, commit_2)
 }
 
-compare_git_difftool <- function(commit_1 = NULL, commit_2 = NULL) {
-
-  # from git 1.7.11
-  # git difftool -t meld -d master..mycommit
+compare_git_difftool <- function(commit_1 = NULL, commit_2 = NULL, path = NULL,
+                                 tool = "meld", dir_diff = TRUE, options = NULL) {
+  # We use this form (see `git difftool --help`, `git diff --help`)
+  # git difftool --tool <tool> [<options>] <commit>..<commit> -- [<path>...]
   diff_commits <- paste(c(commit_1, commit_2), collapse = "..")
-  git_args <- c("difftool", "-t", "meld", "-d", diff_commits, "--")
-
-
+  if (!is.null(path)) path <- normalizePath(path)
+  git_args <- c(
+    "difftool", "--tool", tool,
+    "--no-prompt", # never prompt before launching the tool
+    if (isTRUE(dir_diff)) "--dir-diff",
+    options,
+    diff_commits, "--", path
+  )
   ret <- sys::exec_background(
     "git", args = git_args,
     std_out = TRUE, std_err = TRUE
   )
-
   invisible(ret)
 }
 
