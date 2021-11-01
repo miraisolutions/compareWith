@@ -51,12 +51,15 @@ commit SHA, etc. (see 'Details' below).
 \details{
 The functionality is based on
 \href{https://git-scm.com/docs/git-difftool}{\verb{git difftool}} using
-\href{http://meldmerge.org/}{Meld} as external diff tool. Revision arguments can
-be specified in a number of ways, see
-'\href{https://git-scm.com/docs/gitrevisions#_specifying_revisions}{Specifying revisions}'
-in the Git documentation.
+\href{http://meldmerge.org/}{Meld} as external diff tool.
 
-In particular, the following are relevant revision specifications:
+Comparisons are based on the Git repository detected for the current working
+directory, and \code{path} must be part of the repository.
+
+Revision arguments can be specified in a number of ways, see
+'\href{https://git-scm.com/docs/gitrevisions#_specifying_revisions}{Specifying revisions}'
+in the Git documentation. In particular, the following are relevant revision
+specifications:
 \itemize{
 \item \code{HEAD}: The last commit.
 \item \verb{<sha>}: The hexadecimal SHA of any commit.

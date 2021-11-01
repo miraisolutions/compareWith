@@ -12,12 +12,15 @@
 #' @details
 #' The functionality is based on
 #' [`git difftool`](https://git-scm.com/docs/git-difftool) using
-#' [Meld](http://meldmerge.org/) as external diff tool. Revision arguments can
-#' be specified in a number of ways, see
-#' '[Specifying revisions](https://git-scm.com/docs/gitrevisions#_specifying_revisions)'
-#' in the Git documentation.
+#' [Meld](http://meldmerge.org/) as external diff tool.
 #'
-#' In particular, the following are relevant revision specifications:
+#' Comparisons are based on the Git repository detected for the current working
+#' directory, and `path` must be part of the repository.
+#'
+#' Revision arguments can be specified in a number of ways, see
+#' '[Specifying revisions](https://git-scm.com/docs/gitrevisions#_specifying_revisions)'
+#' in the Git documentation. In particular, the following are relevant revision
+#' specifications:
 #'
 #' - `HEAD`: The last commit.
 #' - `<sha>`: The hexadecimal SHA of any commit.
