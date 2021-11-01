@@ -42,9 +42,7 @@ compare_commit <- function(commit_1 = "HEAD", commit_2 = NULL) {
 NULL
 
 
-# TODO: consider @eval man_describeIn_compare_git(...)
-#' @describeIn compare_git Compares the local working copy against a specific
-#'   Git revision.
+#' @eval man_describeIn_compare_git("working")
 #' @param revision The Git revision to compare against (see 'Details' TODO)
 #'
 #' @export
@@ -64,8 +62,7 @@ compare_with_git <- function(path = NULL,
 }
 
 
-# TODO: consider @eval man_describeIn_compare_git(...)
-#' @describeIn compare_git Compares changes between arbitrary Git revisions.
+#' @eval man_describeIn_compare_git("revisions")
 #' @param revision_compare,revision_against The Git revisions to compare
 #'   (`revision_compare` vs. `revision_against`) (see 'Details' TODO)
 #'
@@ -88,6 +85,30 @@ compare_git_revisions <- function(path = NULL,
   }
   # NOTE: git diff(tool) compares `commit_2` against `commit_1`
   compare_git_difftool(path = path, revision_against, revision_compare)
+}
+
+
+#' @eval man_describeIn_compare_git("working", "active_file")
+#'
+#' @export
+compare_active_file_with_git <- function(prompt = TRUE) {
+  compare_with_git(get_active_file(), prompt = prompt)
+}
+
+
+#' @eval man_describeIn_compare_git("working", "active_project")
+#'
+#' @export
+compare_project_with_git <- function(prompt = TRUE) {
+  compare_with_git(get_active_project(), prompt = prompt)
+}
+
+
+#' @eval man_describeIn_compare_git("revisions", "active_project")
+#'
+#' @export
+compare_project_git_revisions <- function(prompt = TRUE) {
+  compare_git_revisions(get_active_project(), prompt = prompt)
 }
 
 

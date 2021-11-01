@@ -4,6 +4,9 @@
 \alias{compare_git}
 \alias{compare_with_git}
 \alias{compare_git_revisions}
+\alias{compare_active_file_with_git}
+\alias{compare_project_with_git}
+\alias{compare_project_git_revisions}
 \title{Git comparison}
 \usage{
 compare_with_git(path = NULL, revision = "HEAD", prompt = FALSE)
@@ -14,6 +17,12 @@ compare_git_revisions(
   revision_against = "@{upstream}",
   prompt = FALSE
 )
+
+compare_active_file_with_git(prompt = TRUE)
+
+compare_project_with_git(prompt = TRUE)
+
+compare_project_git_revisions(prompt = TRUE)
 }
 \arguments{
 \item{path}{Path to a specific file or directory to be compared. If \code{NULL},
@@ -36,10 +45,15 @@ TODO: return, details
 }
 \section{Functions}{
 \itemize{
-\item \code{compare_with_git}: Compares the local working copy against a specific
-Git revision.
+\item \code{compare_with_git}: Compares the local working copy against a specific Git revision.
 
 \item \code{compare_git_revisions}: Compares changes between arbitrary Git revisions.
+
+\item \code{compare_active_file_with_git}: Compares the local working copy against a specific Git revision for the active file.
+
+\item \code{compare_project_with_git}: Compares the local working copy against a specific Git revision for the active project.
+
+\item \code{compare_project_git_revisions}: Compares changes between arbitrary Git revisions for the active project.
 }}
 
 \examples{
