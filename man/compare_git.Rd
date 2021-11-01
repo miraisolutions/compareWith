@@ -9,12 +9,12 @@
 \alias{compare_project_git_revisions}
 \title{Git comparison}
 \usage{
-compare_with_git(path = NULL, revision = "HEAD", prompt = FALSE)
+compare_with_git(revision = "HEAD", path = NULL, prompt = FALSE)
 
 compare_git_revisions(
-  path = NULL,
   revision_compare = "HEAD",
   revision_against = "@{upstream}",
+  path = NULL,
   prompt = FALSE
 )
 
@@ -25,11 +25,11 @@ compare_project_with_git(prompt = TRUE)
 compare_project_git_revisions(prompt = TRUE)
 }
 \arguments{
-\item{path}{Path to a specific file or directory to be compared. If \code{NULL},
-the whole repository is compared.}
-
 \item{revision}{The Git revision to compare against (see 'Details'). The
 default refers to the last commit (\code{HEAD}).}
+
+\item{path}{Path to a specific file or directory to be compared. If \code{NULL},
+the whole repository is compared.}
 
 \item{prompt}{Whether to prompt for revisions via \code{\link[=showPrompt]{showPrompt()}}, using the
 provided values as defaults.}
@@ -90,19 +90,19 @@ e.g. \verb{main@\{u\}}.
   # compare working copy with the last commit (HEAD)
   compare_with_git()
   # compare working copy of a given path with the last commit
-  compare_with_git("path/to/compare")
+  compare_with_git(path = "path/to/compare")
   # compare working copy of the current directory with the last commit
-  compare_with_git(getwd())
+  compare_with_git(path = getwd())
   # compare working copy of a specific file with the last commit
-  compare_with_git("bar/foo.file")
+  compare_with_git(path = "bar/foo.file")
   # compare working copy, prompting for the revision to compare with
   compare_with_git(prompt = TRUE)
   # compare working copy with branch "main"
-  compare_with_git(revision = "main")
+  compare_with_git("main")
   # compare working copy with the current upstream remote
-  compare_with_git(revision = "@{upstream}")
+  compare_with_git("@{upstream}")
   # compare working copy with the second-last commit
-  compare_with_git(revision = "HEAD~1")
+  compare_with_git("HEAD~1")
 
   # compare active file, prompting for the revision to compare against
   compare_active_file_with_git()
@@ -112,17 +112,15 @@ e.g. \verb{main@\{u\}}.
   # compare last commit (HEAD) against current upstream remote (default)
   compare_git_revisions()
   # compare last commit against current upstream remote for a given path
-  compare_git_revisions("path/to/compare")
+  compare_git_revisions(path = "path/to/compare")
   # prompt for the revisions to compare
   compare_git_revisions(prompt = TRUE)
   # compare last commit against "main" branch
   compare_git_revisions(revision_against = "main")
-  # compare last commit against "main" branch
-  compare_git_revisions(revision_against = "main")
-  # compare last commit against previous commit for a given path
-  compare_git_revisions("path/to/compare", "HEAD", "HEAD~1")
-  # compare local "master" branch against the upstream remote for a give path
-  compare_git_revisions("path/to/compare", "master", "master@{upstream}")
+  # compare last commit against previous commit
+  compare_git_revisions("HEAD", "HEAD~1")
+  # compare local "master" branch against the upstream remote for a given path
+  compare_git_revisions(path = "path/to/compare", "master", "master@{upstream}")
 
   # prompt for the revisions to compare for the active project
   compare_project_git_revisions()

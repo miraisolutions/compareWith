@@ -48,8 +48,8 @@ NULL
 #'   default refers to the last commit (`HEAD`).
 #'
 #' @export
-compare_with_git <- function(path = NULL,
-                             revision = "HEAD",
+compare_with_git <- function(revision = "HEAD",
+                             path = NULL,
                              prompt = FALSE) {
 
   # make sure `path` exists if specified
@@ -71,9 +71,9 @@ compare_with_git <- function(path = NULL,
 #'   the current branch (`@{upstream}`).
 #'
 #' @export
-compare_git_revisions <- function(path = NULL,
-                                  revision_compare = "HEAD",
+compare_git_revisions <- function(revision_compare = "HEAD",
                                   revision_against = "@{upstream}",
+                                  path = NULL,
                                   prompt = FALSE) {
 
   # make sure `path` exists if specified
@@ -96,7 +96,7 @@ compare_git_revisions <- function(path = NULL,
 #'
 #' @export
 compare_active_file_with_git <- function(prompt = TRUE) {
-  compare_with_git(get_active_file(), prompt = prompt)
+  compare_with_git(path = get_active_file(), prompt = prompt)
 }
 
 
@@ -104,7 +104,7 @@ compare_active_file_with_git <- function(prompt = TRUE) {
 #'
 #' @export
 compare_project_with_git <- function(prompt = TRUE) {
-  compare_with_git(get_active_project(), prompt = prompt)
+  compare_with_git(path = get_active_project(), prompt = prompt)
 }
 
 
@@ -112,7 +112,7 @@ compare_project_with_git <- function(prompt = TRUE) {
 #'
 #' @export
 compare_project_git_revisions <- function(prompt = TRUE) {
-  compare_git_revisions(get_active_project(), prompt = prompt)
+  compare_git_revisions(path = get_active_project(), prompt = prompt)
 }
 
 
