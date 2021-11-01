@@ -28,20 +28,46 @@ compare_project_git_revisions(prompt = TRUE)
 \item{path}{Path to a specific file or directory to be compared. If \code{NULL},
 the whole repository is compared.}
 
-\item{revision}{The Git revision to compare against (see 'Details' TODO)}
+\item{revision}{The Git revision to compare against (see 'Details'). The
+default refers to the last commit (\code{HEAD}).}
 
-\item{prompt}{Whether to prompt for revisions via \code{\link[=showPrompt]{showPrompt()}}).}
+\item{prompt}{Whether to prompt for revisions via \code{\link[=showPrompt]{showPrompt()}}, using the
+provided values as defaults.}
 
 \item{revision_compare, revision_against}{The Git revisions to compare
-(\code{revision_compare} vs. \code{revision_against}) (see 'Details' TODO)}
+(\code{revision_compare} vs. \code{revision_against}) (see 'Details'). With default
+values, the last commit (\code{HEAD}) is compared against the upstream remote for
+the current branch (\verb{@\{upstream\}}).}
+}
+\value{
+Invisibly returns the result of calling \verb{git difftool} via
+\code{\link[sys:exec]{sys::exec_background()}}.
 }
 \description{
 Compare the local working copy against a Git revision, or the changes between
 arbitrary Git revisions. Revisions can be specified as "HEAD", branch names,
-commit SHA, etc. (see 'Details' TODO).
+commit SHA, etc. (see 'Details' below).
 }
 \details{
-TODO: return, details
+The functionality is based on
+\href{https://git-scm.com/docs/git-difftool}{\verb{git difftool}} using
+\href{http://meldmerge.org/}{Meld} as external diff tool. Revision arguments can
+be specified in a number of ways, see
+'\href{https://git-scm.com/docs/gitrevisions#_specifying_revisions}{Specifying revisions}'
+in the Git documentation.
+
+In particular, the following are relevant revision specifications:
+\itemize{
+\item \code{HEAD}: The last commit.
+\item \verb{<sha>}: The hexadecimal SHA of any commit.
+\item \verb{<branch>}, \verb{<tag>}: The name of a branch or tag, e.g. \code{main},\code{master},
+\code{v1.0.1}.
+\item \verb{@\{upstream\}}, \verb{@\{u\}}: The upstream remote of the current branch.
+\item \verb{<branch>@\{upstream\}}, \verb{<branch>@\{u\}}: The upstream remote of \verb{<branch>},
+e.g. \verb{main@\{u\}}.
+\item \verb{<revision>~<n>}: \verb{<n>} commits before any specified \verb{<revision>}, e.g.
+\code{HEAD~1}, \code{main~1}.
+}
 }
 \section{Functions}{
 \itemize{
@@ -63,5 +89,5 @@ TODO: return, details
 }
 \seealso{
 \link[=compareWith-addins]{RStudio addins} for file and project comparison
-with support for version control (TODO).
+with support for version control.
 }

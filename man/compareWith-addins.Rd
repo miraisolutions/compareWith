@@ -20,6 +20,9 @@ active files or projects against local or version control repository items.
 }
 
 \seealso{
-Functions \code{\link[=compare_with_other]{compare_with_other()}} and \code{\link[=compare_with_repo]{compare_with_repo()}} for the
-flexible comparison of files and directories.
+Functions \code{\link[=compare_with_other]{compare_with_other()}} and \code{\link[=compare_with_repo]{compare_with_repo()}} for the flexible
+comparison of files and directories.
+
+Functions \code{\link[=compare_with_git]{compare_with_git()}} and \code{\link[=compare_git_revisions]{compare_git_revisions()}} for the flexible
+comparison against or between arbitrary Git revisions.
 }

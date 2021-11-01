@@ -1,19 +1,38 @@
-# TODO: review documentation
-
 #' Git comparison
 #'
 #' Compare the local working copy against a Git revision, or the changes between
 #' arbitrary Git revisions. Revisions can be specified as "HEAD", branch names,
-#' commit SHA, etc. (see 'Details' TODO).
-#'
-#' TODO: return, details
+#' commit SHA, etc. (see 'Details' below).
 #'
 #' @param path Path to a specific file or directory to be compared. If `NULL`,
 #'   the whole repository is compared.
-#' @param prompt Whether to prompt for revisions via [showPrompt()]).
+#' @param prompt Whether to prompt for revisions via [showPrompt()], using the
+#'   provided values as defaults.
+#'
+#' @details
+#' The functionality is based on
+#' [`git difftool`](https://git-scm.com/docs/git-difftool) using
+#' [Meld](http://meldmerge.org/) as external diff tool. Revision arguments can
+#' be specified in a number of ways, see
+#' '[Specifying revisions](https://git-scm.com/docs/gitrevisions#_specifying_revisions)'
+#' in the Git documentation.
+#'
+#' In particular, the following are relevant revision specifications:
+#'
+#' - `HEAD`: The last commit.
+#' - `<sha>`: The hexadecimal SHA of any commit.
+#' - `<branch>`, `<tag>`: The name of a branch or tag, e.g. `main`,`master`,
+#' `v1.0.1`.
+#' - `@{upstream}`, `@{u}`: The upstream remote of the current branch.
+#' - `<branch>@{upstream}`, `<branch>@{u}`: The upstream remote of `<branch>`,
+#' e.g. `main@{u}`.
+#' - `<revision>~<n>`: `<n>` commits before any specified `<revision>`, e.g.
+#' `HEAD~1`, `main~1`.
+#'
+#' @template return-git-difftool
 #'
 #' @seealso [RStudio addins][compareWith-addins] for file and project comparison
-#'   with support for version control (TODO).
+#'   with support for version control.
 #'
 #' @example man-roxygen/ex-compare_git.R
 #'
@@ -22,7 +41,8 @@ NULL
 
 
 #' @eval man_describeIn_compare_git("working")
-#' @param revision The Git revision to compare against (see 'Details' TODO)
+#' @param revision The Git revision to compare against (see 'Details'). The
+#'   default refers to the last commit (`HEAD`).
 #'
 #' @export
 compare_with_git <- function(path = NULL,
@@ -43,7 +63,9 @@ compare_with_git <- function(path = NULL,
 
 #' @eval man_describeIn_compare_git("revisions")
 #' @param revision_compare,revision_against The Git revisions to compare
-#'   (`revision_compare` vs. `revision_against`) (see 'Details' TODO)
+#'   (`revision_compare` vs. `revision_against`) (see 'Details'). With default
+#'   values, the last commit (`HEAD`) is compared against the upstream remote for
+#'   the current branch (`@{upstream}`).
 #'
 #' @export
 compare_git_revisions <- function(path = NULL,

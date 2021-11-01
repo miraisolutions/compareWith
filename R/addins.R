@@ -5,8 +5,12 @@
 #'
 #' @eval man_section_addins()
 #'
-#' @seealso Functions [compare_with_other()] and [compare_with_repo()] for the
-#'   flexible comparison of files and directories.
+#' @seealso
+#' Functions [compare_with_other()] and [compare_with_repo()] for the flexible
+#' comparison of files and directories.
+#'
+#' Functions [compare_with_git()] and [compare_git_revisions()] for the flexible
+#' comparison against or between arbitrary Git revisions.
 #'
 #' @name compareWith-addins
 NULL
