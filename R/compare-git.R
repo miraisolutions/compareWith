@@ -14,16 +14,15 @@
 #'
 #' @name compare_commit
 #' @export
-compare_commit <- function (commit_1 = "HEAD", commit_2 = "")
-{
+compare_commit <- function(commit_1 = "HEAD", commit_2 = "") {
   # from git 1.7.11
   # git difftool -t meld -d master..mycommit
 
-if (commit_2 == "") { # compare with current state
-  args <- c("difftool", "-t", "meld", "-d", paste0(commit_1))
-} else {
-  args <- c("difftool", "-t", "meld", "-d", paste0(commit_1, "..", commit_2))
-}
+  if (commit_2 == "") { # compare with current state
+    args <- c("difftool", "-t", "meld", "-d", paste0(commit_1))
+  } else {
+    args <- c("difftool", "-t", "meld", "-d", paste0(commit_1, "..", commit_2))
+  }
 
   ret <- sys::exec_background(
     "git",
