@@ -101,6 +101,11 @@ e.g. \verb{main@\{u\}}.
   # compare working copy with the second-last commit
   compare_with_git(revision = "HEAD~1")
 
+  # compare active file, prompting for the revision to compare against
+  compare_active_file_with_git()
+  # compare active project, prompting for the revision to compare against
+  compare_project_with_git()
+
   # compare last commit (HEAD) against current upstream remote (default)
   compare_git_revisions()
   # compare last commit against current upstream remote for a given path
@@ -116,12 +121,8 @@ e.g. \verb{main@\{u\}}.
   # compare local "master" branch against the upstream remote for a give path
   compare_git_revisions("path/to/compare", "master", "master@{upstream}")
 
-  # compare active file, prompting for the revision to compare against
-  compare_active_file_with_git()
-  # compare active project, prompting for the revision to compare against
-  compare_project_with_git()
   # prompt for the revisions to compare for the active project
-  compare_active_file_with_git()
+  compare_project_git_revisions()
 }
 }
 \seealso{
