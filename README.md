@@ -61,34 +61,12 @@ also have to switch to an older stable version.
 
 ## Usage
 
-The functionality of **compareWith** is accessible in RStudio using the
-*Addins* menu.
-
-### Check current modifications
+The functionality of **compareWith** is easily accessible in RStudio
+using the *Addins* menu or the *Command Palette*
+(`Ctrl`/`Cmd`+`Shift`+`P`). See
+`help("compareWith-addins", package = "compareWith")` for details and
+references to the underlying generic comparison functions in the
+package.
 
 ![Merge conflicts with
 compareWith](man/figures/compareWith-RStudioAddins.gif)
-
-### Compare with other branch or commit
-
-Addins:
-
-  - “Compare commits or branches…” to compare two different commits or
-    branches
-  - “Compare current with commit or branch…” to compare the current
-    state with another commit or branch.
-
-Functions:
-
-  - `compare_commit()` to compare current modifications with last
-    commit. Default to `compare_commit("HEAD", "")`
-      - Similar to `compare_project_with_repo()`
-  - `compare_commit("master", "HEAD")` to compare last commit of your
-    branch with last commit of *master* branch
-  - `compare_commit("master", "")` to compare current modifications with
-    last commit of *master* branch
-      - Same as `compare_branch()`
-  - `compare_commit("master", "dev")` to compare last commit of *dev*
-    branch with last commit of *master* branch
-  - `compare_commit("4224815", "")` to compare current modifications
-    (not commit) with commit `4224815`
