@@ -12,3 +12,13 @@ Name: Compare with other...
 Description: Compare active file with another
 Binding: addin_other
 Interactive: true
+
+Name: Compare commits or branches...
+Description: Compare couples of commits or branches
+Binding: addin_branch
+Interactive: true
+
+Name: Compare current with commit or branch...
+Description: Compare current git status with a commit or a branch
+Binding: addin_branch_current
+Interactive: true

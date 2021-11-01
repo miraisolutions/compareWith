@@ -28,7 +28,7 @@ default), the parent directory of the input \code{path} is used.}
 }
 \value{
 Invisibly returns the result of calling \code{meld} via
-\code{\link[sys:exec_background]{sys::exec_background()}}.
+\code{\link[sys:exec]{sys::exec_background()}}.
 }
 \description{
 Compare file or directory to another selected by the user or to the version
