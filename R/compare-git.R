@@ -18,6 +18,79 @@ compare_commit <- function(commit_1 = "HEAD", commit_2 = NULL) {
   compare_git_difftool(commit_1, commit_2)
 }
 
+
+# TODO: review documentation
+
+#' Git comparison
+#'
+#' Compare the local working copy against a Git revision, or the changes between
+#' arbitrary Git revisions. Revisions can be specified as "HEAD", branch names,
+#' commit SHA, etc. (see 'Details' TODO).
+#'
+#' TODO: return, details
+#'
+#' @param path Path to a specific file or directory to be compared. If `NULL`,
+#'   the whole repository is compared.
+#' @param prompt Whether to prompt for revisions via [showPrompt()]).
+#'
+#' @seealso [RStudio addins][compareWith-addins] for file and project comparison
+#'   with support for version control (TODO).
+#'
+#' @example man-roxygen/ex-compare_git.R
+#'
+#' @name compare_git
+NULL
+
+
+# TODO: consider @eval man_describeIn_compare_git(...)
+#' @describeIn compare_git Compares the local working copy against a specific
+#'   Git revision.
+#' @param revision The Git revision to compare against (see 'Details' TODO)
+#'
+#' @export
+compare_with_git <- function(path = NULL,
+                             revision = "HEAD",
+                             prompt = FALSE) {
+
+  # make sure `path` exists if specified
+  if (!is.null(path)) check_path(path)
+  # prompt for revision
+  if (isTRUE(prompt)) {
+    revision <- prompt_git_revision(
+      "Git revision to compare against", default = revision
+    )
+  }
+  compare_git_difftool(path = path, revision)
+}
+
+
+# TODO: consider @eval man_describeIn_compare_git(...)
+#' @describeIn compare_git Compares changes between arbitrary Git revisions.
+#' @param revision_compare,revision_against The Git revisions to compare
+#'   (`revision_compare` vs. `revision_against`) (see 'Details' TODO)
+#'
+#' @export
+compare_git_revisions <- function(path = NULL,
+                                  revision_compare = "HEAD",
+                                  revision_against = "@{upstream}",
+                                  prompt = FALSE) {
+
+  # make sure `path` exists if specified
+  if (!is.null(path)) check_path(path)
+  # prompt for revisions
+  if (isTRUE(prompt)) {
+    revision_compare <- prompt_git_revision(
+      "Git revision for comparison", default = revision_compare
+    )
+    revision_against <- prompt_git_revision(
+      "Git revision to compare against", default = revision_against
+    )
+  }
+  # NOTE: git diff(tool) compares `commit_2` against `commit_1`
+  compare_git_difftool(path = path, revision_against, revision_compare)
+}
+
+
 compare_git_difftool <- function(commit_1 = NULL, commit_2 = NULL, path = NULL,
                                  tool = "meld", dir_diff = TRUE, options = NULL) {
   # We use this form (see `git difftool --help`, `git diff --help`)
