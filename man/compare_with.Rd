@@ -44,7 +44,7 @@ control repository.
 
 \item \code{compare_active_file_with_repo}: Compares the active file against the version control repository.
 
-\item \code{compare_project_with_repo}: Compares the active file against the version control repository.
+\item \code{compare_project_with_repo}: Compares the active project against the version control repository.
 }}
 
 \examples{

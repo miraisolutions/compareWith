@@ -17,7 +17,7 @@ describe_compare_with <- function(what, with) {
     what,
     path = "a file or directory",
     active_file = "the active file",
-    active_project = "the active file"
+    active_project = "the active project"
   )
   with <- switch(
     with,
