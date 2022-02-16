@@ -20,7 +20,13 @@ The package relies on [**Meld**](http://meldmerge.org/), a common visual diff an
 
 ## Installation
 
-You can install the latest **compareWith** from GitHub using the [**remotes**](https://CRAN.R-project.org/package=remotes) package
+You can install the latest released version of **compareWith** from GitHub using the [**remotes**](https://CRAN.R-project.org/package=remotes) package
+
+``` r
+remotes::install_github("miraisolutions/compareWith@*release")
+```
+
+The development version of **compareWith** is also available for installation via
 
 ``` r
 remotes::install_github("miraisolutions/compareWith")
