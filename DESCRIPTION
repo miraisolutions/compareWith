@@ -1,6 +1,6 @@
 Package: compareWith
 Title: Compare and Merge Tools for RStudio
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: 
     c(person(given = "Roland",
              family = "Schmid",
