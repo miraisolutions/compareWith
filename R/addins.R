@@ -5,8 +5,12 @@
 #'
 #' @eval man_section_addins()
 #'
-#' @seealso Functions [compare_with_other()] and [compare_with_repo()] for the
-#'   flexible comparison of files and directories.
+#' @seealso
+#' Functions [compare_with_other()] and [compare_with_repo()] for the flexible
+#' comparison of files and directories.
+#'
+#' Functions [compare_with_git()] and [compare_git_revisions()] for the flexible
+#' comparison against or between arbitrary Git revisions.
 #'
 #' @name compareWith-addins
 NULL
@@ -34,6 +38,18 @@ addin_repo <- addin_factory(
 addin_project <- addin_factory(
   addin = "Compare with repo - project",
   compare_project_with_repo()
+)
+addin_git <- addin_factory(
+  addin = "Compare with Git...",
+  compare_active_file_with_git()
+)
+addin_git_project <- addin_factory(
+  addin = "Compare with Git... - project",
+  compare_project_with_git()
+)
+addin_git_revisions <- addin_factory(
+  addin = "Compare Git revisions... - project",
+  compare_project_git_revisions()
 )
 
 # Handle addin-specific error messages

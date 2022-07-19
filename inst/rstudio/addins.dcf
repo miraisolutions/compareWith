@@ -12,3 +12,18 @@ Name: Compare with other...
 Description: Compare active file with another
 Binding: addin_other
 Interactive: true
+
+Name: Compare with Git...
+Description: Compare active file with an arbitrary Git revision
+Binding: addin_git
+Interactive: true
+
+Name: Compare with Git... - project
+Description: Compare active project with an arbitrary Git revision
+Binding: addin_git_project
+Interactive: true
+
+Name: Compare Git revisions... - project
+Description: Compare changes between arbitrary Git revisions for the active project
+Binding: addin_git_revisions
+Interactive: true

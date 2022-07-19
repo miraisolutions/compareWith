@@ -2,13 +2,20 @@ Package: compareWith
 Title: Compare and Merge Tools for RStudio
 Version: 0.0.1.9000
 Authors@R: 
-    c(person("Roland", "Schmid", role = c("aut"),
+    c(person(given = "Roland",
+             family = "Schmid",
+             role = "aut",
              email = "roland.schmid@mirai-solutions.com"),
-      person("Riccardo", "Porreca", role = ("aut"),
+      person(given = "Riccardo",
+             family = "Porreca",
+             role = "aut",
              email = "riccardo.porreca@mirai-solutions.com"),
-      person("Nicoletta", "Farabullini", role = c("aut", "cre"),
+      person(given = "Nicoletta",
+             family = "Farabullini",
+             role = c("aut", "cre"),
              email = "nicoletta.farabullini@mirai-solutions.com"),
-      person("Mirai Solutions GmbH", role = "cph",
+      person(given = "Mirai Solutions GmbH",
+             role = "cph",
              email = "info@mirai-solutions.com"))
 Description: Allows RStudio users to compare files with Meld
     through RStudio addins. This facilitates and streamlines performing
@@ -18,7 +25,6 @@ License: GPL-3
 URL: https://mirai-solutions.ch,
     https://github.com/miraisolutions/compareWith#readme
 BugReports: https://github.com/miraisolutions/compareWith/issues
-SystemRequirements: meld
 Imports:
     rstudioapi,
     sys
@@ -27,4 +33,5 @@ Suggests:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2
+SystemRequirements: meld

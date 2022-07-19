@@ -1,5 +1,7 @@
 # compareWith (development version)
 
+- Add support for comparison between arbitrary Git revisions (#46, initial proposal from @statnmap in #37).
+
 # compareWith 0.0.1
 
 ## Initial release
