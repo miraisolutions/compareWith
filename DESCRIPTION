@@ -2,20 +2,12 @@ Package: compareWith
 Title: Compare and Merge Tools for RStudio
 Version: 0.0.1.9000
 Authors@R: 
-    c(person(given = "Roland",
-             family = "Schmid",
-             role = "aut",
+    c(person("Roland", "Schmid", role = "aut",
              email = "roland.schmid@mirai-solutions.com"),
-      person(given = "Riccardo",
-             family = "Porreca",
-             role = "aut",
+      person("Riccardo", "Porreca", role = c("aut", "cre"),
              email = "riccardo.porreca@mirai-solutions.com"),
-      person(given = "Nicoletta",
-             family = "Farabullini",
-             role = c("aut", "cre"),
-             email = "nicoletta.farabullini@mirai-solutions.com"),
-      person(given = "Mirai Solutions GmbH",
-             role = "cph",
+      person("Nicoletta", "Farabullini", role = "aut"),
+      person("Mirai Solutions GmbH", role = "cph",
              email = "info@mirai-solutions.com"))
 Description: Allows RStudio users to compare files with Meld
     through RStudio addins. This facilitates and streamlines performing
