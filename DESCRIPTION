@@ -2,9 +2,9 @@ Package: compareWith
 Title: Compare and Merge Tools for RStudio
 Version: 0.0.1.9000
 Authors@R: 
-    c(person("Roland", "Schmid", role = "aut",
+    c(person("Roland", "Schmid", role = c("aut", "cre"),
              email = "roland.schmid@mirai-solutions.com"),
-      person("Riccardo", "Porreca", role = c("aut", "cre"),
+      person("Riccardo", "Porreca", role = "aut",
              email = "riccardo.porreca@mirai-solutions.com"),
       person("Nicoletta", "Farabullini", role = "aut"),
       person("Mirai Solutions GmbH", role = "cph",
