@@ -8,7 +8,7 @@ Authors@R:
              email = "riccardo.porreca@mirai-solutions.com"),
       person("Nicoletta", "Farabullini", role = "aut"),
       person("Mirai Solutions GmbH", role = "cph",
-             email = "info@mirai-solutions.com"))
+             email = "opensource@mirai-solutions.com"))
 Description: Allows RStudio users to compare files with Meld
     through RStudio addins. This facilitates and streamlines performing
     diff and merge tasks from within RStudio, especially for projects
