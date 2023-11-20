@@ -46,7 +46,7 @@ jobs:
           sudo apt-get install -y meld
 
       - name: Run headless check
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: |
             Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning')"
